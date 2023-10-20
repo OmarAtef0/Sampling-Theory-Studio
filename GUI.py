@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'task2.ui'
+# Form implementation generated from reading ui file 'GUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,28 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(1005, 825)
-        Form.setStyleSheet("QLabel#Header {\n"
-"    font-size: 40px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(Form)
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.Header = QtWidgets.QLabel(Form)
-        self.Header.setStyleSheet("QLabel#Header {\n"
-"    font-size: 40px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"")
-        self.Header.setObjectName("Header")
-        self.verticalLayout_7.addWidget(self.Header)
-        self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.tabWidget = QtWidgets.QTabWidget(Form)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(987, 797)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setGeometry(QtCore.QRect(0, 5, 981, 731))
         self.tabWidget.setStyleSheet("QLabel#Header {\n"
 "    font-size: 40px; \n"
 "}\n"
@@ -55,31 +41,31 @@ class Ui_Form(object):
         self.CSV_file_2.setFrame(True)
         self.CSV_file_2.setObjectName("CSV_file_2")
         self.gridLayout_2.addWidget(self.CSV_file_2, 1, 0, 1, 1)
-        self.widget = QtWidgets.QWidget(self.tab)
-        self.widget.setGeometry(QtCore.QRect(10, 560, 961, 65))
-        self.widget.setStyleSheet("QPushButton#Add_FPA{\n"
+        self.layoutWidget = QtWidgets.QWidget(self.tab)
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 560, 961, 65))
+        self.layoutWidget.setStyleSheet("QPushButton#Add_FPA{\n"
 "    background-color: DodgerBlue;\n"
 "    color:White\n"
 "}\n"
 "")
-        self.widget.setObjectName("widget")
-        self.gridLayout = QtWidgets.QGridLayout(self.widget)
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.label = QtWidgets.QLabel(self.widget)
+        self.label = QtWidgets.QLabel(self.layoutWidget)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 1, 1, 1)
-        self.Frequency = QtWidgets.QDoubleSpinBox(self.widget)
+        self.Frequency = QtWidgets.QDoubleSpinBox(self.layoutWidget)
         self.Frequency.setObjectName("Frequency")
         self.gridLayout.addWidget(self.Frequency, 0, 2, 1, 1)
-        self.Amplitude = QtWidgets.QDoubleSpinBox(self.widget)
+        self.Amplitude = QtWidgets.QDoubleSpinBox(self.layoutWidget)
         self.Amplitude.setObjectName("Amplitude")
         self.gridLayout.addWidget(self.Amplitude, 0, 4, 1, 1)
-        self.CSV_file = QtWidgets.QFontComboBox(self.widget)
+        self.CSV_file = QtWidgets.QFontComboBox(self.layoutWidget)
         self.CSV_file.setCurrentText("")
         self.CSV_file.setObjectName("CSV_file")
         self.gridLayout.addWidget(self.CSV_file, 0, 0, 1, 1)
-        self.Add_FPA = QtWidgets.QPushButton(self.widget)
+        self.Add_FPA = QtWidgets.QPushButton(self.layoutWidget)
         self.Add_FPA.setMaximumSize(QtCore.QSize(150, 16777215))
         self.Add_FPA.setStyleSheet("QPushButton#Add_FPA{\n"
 "    background-color: DodgerBlue;\n"
@@ -88,7 +74,7 @@ class Ui_Form(object):
 "")
         self.Add_FPA.setObjectName("Add_FPA")
         self.gridLayout.addWidget(self.Add_FPA, 0, 7, 1, 1)
-        self.Delete_FPA = QtWidgets.QPushButton(self.widget)
+        self.Delete_FPA = QtWidgets.QPushButton(self.layoutWidget)
         self.Delete_FPA.setStyleSheet("QPushButton#Delete_FPA {\n"
 "    background-color: red;\n"
 "    color: white;\n"
@@ -96,25 +82,25 @@ class Ui_Form(object):
 "")
         self.Delete_FPA.setObjectName("Delete_FPA")
         self.gridLayout.addWidget(self.Delete_FPA, 1, 7, 1, 1)
-        self.label_3 = QtWidgets.QLabel(self.widget)
+        self.label_3 = QtWidgets.QLabel(self.layoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 5, 1, 1)
-        self.Phase = QtWidgets.QDoubleSpinBox(self.widget)
+        self.Phase = QtWidgets.QDoubleSpinBox(self.layoutWidget)
         self.Phase.setObjectName("Phase")
         self.gridLayout.addWidget(self.Phase, 0, 6, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.widget)
+        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 3, 1, 1)
-        self.widget1 = QtWidgets.QWidget(self.tab)
-        self.widget1.setGeometry(QtCore.QRect(10, 10, 961, 531))
-        self.widget1.setObjectName("widget1")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget1)
+        self.layoutWidget_2 = QtWidgets.QWidget(self.tab)
+        self.layoutWidget_2.setGeometry(QtCore.QRect(10, 10, 961, 531))
+        self.layoutWidget_2.setObjectName("layoutWidget_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.openGLWidget = QtWidgets.QOpenGLWidget(self.widget1)
+        self.openGLWidget = QtWidgets.QOpenGLWidget(self.layoutWidget_2)
         self.openGLWidget.setObjectName("openGLWidget")
         self.verticalLayout_2.addWidget(self.openGLWidget)
-        self.openGLWidget_2 = QtWidgets.QOpenGLWidget(self.widget1)
+        self.openGLWidget_2 = QtWidgets.QOpenGLWidget(self.layoutWidget_2)
         self.openGLWidget_2.setObjectName("openGLWidget_2")
         self.verticalLayout_2.addWidget(self.openGLWidget_2)
         self.tabWidget.addTab(self.tab, "")
@@ -165,22 +151,22 @@ class Ui_Form(object):
         self.SNR_Slider.setTickInterval(15)
         self.SNR_Slider.setObjectName("SNR_Slider")
         self.verticalLayout_5.addWidget(self.SNR_Slider)
-        self.widget2 = QtWidgets.QWidget(self.tab_3)
-        self.widget2.setGeometry(QtCore.QRect(10, 640, 791, 71))
-        self.widget2.setObjectName("widget2")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget2)
+        self.layoutWidget_3 = QtWidgets.QWidget(self.tab_3)
+        self.layoutWidget_3.setGeometry(QtCore.QRect(10, 640, 791, 71))
+        self.layoutWidget_3.setObjectName("layoutWidget_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget_3)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.horizontalSlider_3 = QtWidgets.QSlider(self.widget2)
+        self.horizontalSlider_3 = QtWidgets.QSlider(self.layoutWidget_3)
         self.horizontalSlider_3.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_3.setTickPosition(QtWidgets.QSlider.NoTicks)
         self.horizontalSlider_3.setTickInterval(0)
         self.horizontalSlider_3.setObjectName("horizontalSlider_3")
         self.horizontalLayout.addWidget(self.horizontalSlider_3)
-        self.label_10 = QtWidgets.QLabel(self.widget2)
+        self.label_10 = QtWidgets.QLabel(self.layoutWidget_3)
         self.label_10.setObjectName("label_10")
         self.horizontalLayout.addWidget(self.label_10)
-        self.label_9 = QtWidgets.QLabel(self.widget2)
+        self.label_9 = QtWidgets.QLabel(self.layoutWidget_3)
         self.label_9.setTextFormat(QtCore.Qt.AutoText)
         self.label_9.setScaledContents(False)
         self.label_9.setWordWrap(False)
@@ -188,39 +174,30 @@ class Ui_Form(object):
         self.label_9.setObjectName("label_9")
         self.horizontalLayout.addWidget(self.label_9)
         self.tabWidget.addTab(self.tab_3, "")
-        self.verticalLayout.addWidget(self.tabWidget)
-        self.verticalLayout_7.addLayout(self.verticalLayout)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Form)
+        self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.Header.setText(_translate("Form", "Sampling Studio"))
-        self.pushButton_2.setText(_translate("Form", "Sampling"))
-        self.CSV_file_2.setCurrentText(_translate("Form", "Test1"))
-        self.label.setText(_translate("Form", "Frequency"))
-        self.Add_FPA.setText(_translate("Form", "Add"))
-        self.Delete_FPA.setText(_translate("Form", "Delete"))
-        self.label_3.setText(_translate("Form", "Phase"))
-        self.label_2.setText(_translate("Form", "Amplitude"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Form", "Composer"))
-        self.checkBox.setText(_translate("Form", "Sampling"))
-        self.checkBox_2.setText(_translate("Form", "Add noise"))
-        self.label_8.setText(_translate("Form", "Sampling Frequency (Hz)"))
-        self.SNR_Label.setText(_translate("Form", "SNR   (dBW)"))
-        self.label_10.setText(_translate("Form", "1.0"))
-        self.label_9.setText(_translate("Form", "FMax"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Form", "Sampler"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pushButton_2.setText(_translate("MainWindow", "Sampling"))
+        self.CSV_file_2.setCurrentText(_translate("MainWindow", "Test1"))
+        self.label.setText(_translate("MainWindow", "Frequency"))
+        self.Add_FPA.setText(_translate("MainWindow", "Add"))
+        self.Delete_FPA.setText(_translate("MainWindow", "Delete"))
+        self.label_3.setText(_translate("MainWindow", "Phase"))
+        self.label_2.setText(_translate("MainWindow", "Amplitude"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Composer"))
+        self.checkBox.setText(_translate("MainWindow", "Sampling"))
+        self.checkBox_2.setText(_translate("MainWindow", "Add noise"))
+        self.label_8.setText(_translate("MainWindow", "Sampling Frequency (Hz)"))
+        self.SNR_Label.setText(_translate("MainWindow", "SNR   (dBW)"))
+        self.label_10.setText(_translate("MainWindow", "1.0"))
+        self.label_9.setText(_translate("MainWindow", "FMax"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "Sampler"))
