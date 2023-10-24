@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.label_4 = QtWidgets.QLabel(self.frame_3)
         font = QtGui.QFont()
-        font.setPointSize(12)
+        font.setPointSize(11)
         font.setBold(True)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")

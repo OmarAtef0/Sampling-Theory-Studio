@@ -26,22 +26,21 @@ class SamplingStudioApp(QMainWindow):
     self.ui.setupUi(self)  
 
     # for deleted signal/empty Graph
-    self.signal_deleted = False
     self.graph_empty = True
 
     self.browsed_signal = SampledSignal()
-    self.viewer_original_signal = Signal()
+    self.original_signal = Signal()
     self.interpolated_signal = Signal()
 
     # initialize graph objects array/dict
-    self.plotter_window_dict = {
-                                "Primary1": PlotterWindow(self.ui.primary_plot.plot()),
-                                "Primary2": PlotterWindow(self.ui.primary_plot.plot()),
-                                "Primary3": PlotterWindow(self.ui.primary_plot.plot()),
-                                "Secondary": PlotterWindow(self.ui.reconstructed_plot.plot()),
-                                "Error": PlotterWindow(self.ui.error_plot.plot())
-                                # "Sinusoid": PlotterWindow(self.sinusoidalSignal.plot()),
-                                # "Summed": PlotterWindow(self.summedSignal.plot())
+    self.plots_dict = {
+                                "Primary1": self.ui.primary_plot.plot(),
+                                "Primary2": self.ui.primary_plot.plot(),
+                                "Primary3": self.ui.primary_plot.plot(),
+                                "Secondary": self.ui.reconstructed_plot.plot(),
+                                "Error": self.ui.error_plot.plot()
+                                # "Sinusoid": self.sinusoidalSignal.plot(),
+                                # "Summed": self.summedSignal.plot()
                                }
     ''' 
     Primary1 is the original signal\n

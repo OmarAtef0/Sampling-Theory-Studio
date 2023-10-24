@@ -227,7 +227,7 @@ margin: 3px;
                   <widget class="QLabel" name="label_4">
                    <property name="font">
                     <font>
-                     <pointsize>12</pointsize>
+                     <pointsize>11</pointsize>
                      <bold>true</bold>
                     </font>
                    </property>
