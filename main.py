@@ -15,8 +15,9 @@ from pyqtgraph import PlotWidget
 import viewer
 from classes import *
 from task2 import Ui_MainWindow
-
+import composer
 MAX_SAMPLES = 3000
+NUM_OF_POINTS = 3000
   
 class SamplingStudioApp(QMainWindow):
   def __init__(self):
@@ -27,21 +28,24 @@ class SamplingStudioApp(QMainWindow):
 
     # for deleted signal/empty Graph
     self.graph_empty = True
-
+    self.sinusoidal_index = 0
+    self.sinusoidal_number = 1
     self.browsed_signal = SampledSignal()
     self.original_signal = Signal()
     self.interpolated_signal = Signal()
+    self.sinusoidals_list = []
+    self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
 
     # initialize graph objects array/dict
     self.plots_dict = {
-                                "Primary1": self.ui.primary_plot.plot(),
-                                "Primary2": self.ui.primary_plot.plot(),
-                                "Primary3": self.ui.primary_plot.plot(),
-                                "Secondary": self.ui.reconstructed_plot.plot(),
-                                "Error": self.ui.error_plot.plot()
-                                # "Sinusoid": self.sinusoidalSignal.plot(),
-                                # "Summed": self.summedSignal.plot()
-                               }
+                        "Primary1": self.ui.primary_plot.plot(),
+                        "Primary2": self.ui.primary_plot.plot(),
+                        "Primary3": self.ui.primary_plot.plot(),
+                        "Secondary": self.ui.reconstructed_plot.plot(),
+                        "Error": self.ui.error_plot.plot(),
+                        "Sinusoidal": self.ui.sinusoidal_secondary_plot_widget.plot(),
+                        "Summed": self.ui.sinusoidal_main_plot_widget.plot()
+                        }
     ''' 
     Primary1 is the original signal\n
     Primary2 is the resampled points \n
@@ -66,6 +70,22 @@ class SamplingStudioApp(QMainWindow):
     # self.ui.noise_slider.valueChanged.connect()
     self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value()))
 
+    # Sinsusoidal_Sliders
+    self.ui.sinusoidal_frequency_slider.valueChanged.connect(lambda: composer.plot_sinusoidal_wave(self))
+    
+    self.ui.sinusoidal_frequency_slider.valueChanged.connect(lambda: self.ui.sinusoidal_frequency_LCD.display(self.ui.sinusoidal_frequency_slider.value()))
+    
+    self.ui.sinusoidal_amplitude_slider.valueChanged.connect(lambda: composer.plot_sinusoidal_wave(self))
+    self.ui.sinusoidal_amplitude_slider.valueChanged.connect(lambda: self.ui.sinusoidal_amplitude_LCD.display(self.ui.sinusoidal_amplitude_slider.value()))
+    
+    self.ui.sinusoidal_phase_slider.valueChanged.connect(lambda: composer.plot_sinusoidal_wave(self))
+    self.ui.sinusoidal_phase_slider.valueChanged.connect(lambda: self.ui.sinusoidal_phase_LCD.display(self.ui.sinusoidal_phase_slider.value()))
+
+    self.ui.add_sinusoidal_button.clicked.connect(lambda: composer.add_sinusoidal_wave(self))
+
+    self.ui.sinusoidals_signals_menu.currentIndexChanged.connect(lambda: composer.update_sinusoidal_menubar(self, 
+                                                                                            self.ui.sinusoidals_signals_menu.currentIndex()))
+    
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
