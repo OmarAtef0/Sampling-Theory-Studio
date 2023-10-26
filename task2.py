@@ -47,6 +47,7 @@ class Ui_MainWindow(object):
         self.primary_plot.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.primary_plot.setAutoFillBackground(False)
         self.primary_plot.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+        
 "margin: 3px;\n"
 "")
         self.primary_plot.setObjectName("primary_plot")
@@ -110,11 +111,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
+        font.setWeight(75)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_4.addWidget(self.label_4)
         self.sampling_slider = QtWidgets.QSlider(self.frame_3)
-        self.sampling_slider.setMaximum(4)
         self.sampling_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sampling_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sampling_slider.setObjectName("sampling_slider")
@@ -138,11 +139,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
+        font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_4.addWidget(self.label_3)
         self.noise_slider = QtWidgets.QSlider(self.frame_3)
-        self.noise_slider.setMaximum(4)
         self.noise_slider.setOrientation(QtCore.Qt.Horizontal)
         self.noise_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.noise_slider.setObjectName("noise_slider")
@@ -172,6 +173,7 @@ class Ui_MainWindow(object):
         self.import_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.import_btn.setFont(font)
         self.import_btn.setStyleSheet("\n"
 "\n"
@@ -197,17 +199,18 @@ class Ui_MainWindow(object):
         self.clear_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.clear_btn.setFont(font)
         self.clear_btn.setStyleSheet("\n"
 "\n"
 "QPushButton {\n"
-"    background-color: rgb(236, 0, 0);\n"
+"    background-color: rgb(0, 85, 255);\n"
 "color:rgb(255, 255, 255);\n"
 "border-radius:5px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(162, 0, 0)\n"
+"    background-color: rgb(0, 50, 150);\n"
 "}\n"
 "")
         self.clear_btn.setObjectName("clear_btn")
@@ -251,46 +254,12 @@ class Ui_MainWindow(object):
 "")
         self.sinusoidal_main_plot_widget.setObjectName("sinusoidal_main_plot_widget")
         self.verticalLayout_16.addWidget(self.sinusoidal_main_plot_widget)
-        self.frame_35 = QtWidgets.QFrame(self.frame_21)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frame_35.sizePolicy().hasHeightForWidth())
-        self.frame_35.setSizePolicy(sizePolicy)
-        self.frame_35.setMaximumSize(QtCore.QSize(16777215, 45))
-        self.frame_35.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_35.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_35.setObjectName("frame_35")
-        self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.frame_35)
-        self.horizontalLayout_14.setContentsMargins(0, 0, 0, -1)
-        self.horizontalLayout_14.setSpacing(0)
-        self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        self.add_sinusoidal_button_2 = QtWidgets.QPushButton(self.frame_35)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.add_sinusoidal_button_2.sizePolicy().hasHeightForWidth())
-        self.add_sinusoidal_button_2.setSizePolicy(sizePolicy)
-        self.add_sinusoidal_button_2.setMinimumSize(QtCore.QSize(80, 30))
-        self.add_sinusoidal_button_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        font = QtGui.QFont()
-        font.setBold(True)
-        self.add_sinusoidal_button_2.setFont(font)
-        self.add_sinusoidal_button_2.setStyleSheet("\n"
-"\n"
-"QPushButton {\n"
-"    background-color: rgb(0, 85, 255);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius:5px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(0, 50, 150);\n"
-"}\n"
-"")
-        self.add_sinusoidal_button_2.setObjectName("add_sinusoidal_button_2")
-        self.horizontalLayout_14.addWidget(self.add_sinusoidal_button_2)
-        self.verticalLayout_16.addWidget(self.frame_35)
+        self.sampling_PushButton = QtWidgets.QPushButton(self.frame_21)
+        self.sampling_PushButton.setObjectName("sampling_PushButton")
+        self.verticalLayout_16.addWidget(self.sampling_PushButton)
+        self.clear_pushButton = QtWidgets.QPushButton(self.frame_21)
+        self.clear_pushButton.setObjectName("clear_pushButton")
+        self.verticalLayout_16.addWidget(self.clear_pushButton)
         self.horizontalLayout_8.addWidget(self.frame_21)
         self.frame_22 = QtWidgets.QFrame(self.tab1_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -309,8 +278,6 @@ class Ui_MainWindow(object):
         self.frame_34.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_34.setObjectName("frame_34")
         self.verticalLayout_25 = QtWidgets.QVBoxLayout(self.frame_34)
-        self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_25.setSpacing(0)
         self.verticalLayout_25.setObjectName("verticalLayout_25")
         self.sinusoidals_signals_menu = QtWidgets.QComboBox(self.frame_34)
         self.sinusoidals_signals_menu.setObjectName("sinusoidals_signals_menu")
@@ -322,8 +289,6 @@ class Ui_MainWindow(object):
         self.frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_24.setObjectName("frame_24")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.frame_24)
-        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_19.setSpacing(0)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
         self.sinusoidal_secondary_plot_widget = PlotWidget(self.frame_24)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -345,7 +310,7 @@ class Ui_MainWindow(object):
         self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_23.setObjectName("frame_23")
         self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_23)
-        self.verticalLayout_18.setContentsMargins(0, 10, 0, 0)
+        self.verticalLayout_18.setContentsMargins(0, 20, 0, 0)
         self.verticalLayout_18.setSpacing(0)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.frame_25 = QtWidgets.QFrame(self.frame_23)
@@ -360,6 +325,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
+        font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_20.addWidget(self.label_5)
@@ -373,7 +339,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setSpacing(6)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.sinusoidal_frequency_slider = QtWidgets.QSlider(self.frame_26)
-        self.sinusoidal_frequency_slider.setMaximum(10)
         self.sinusoidal_frequency_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_frequency_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_frequency_slider.setObjectName("sinusoidal_frequency_slider")
@@ -410,6 +375,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
+        font.setWeight(75)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_22.addWidget(self.label_6)
@@ -423,7 +389,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setSpacing(6)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.sinusoidal_amplitude_slider = QtWidgets.QSlider(self.frame_29)
-        self.sinusoidal_amplitude_slider.setMaximum(10)
         self.sinusoidal_amplitude_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_amplitude_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_amplitude_slider.setObjectName("sinusoidal_amplitude_slider")
@@ -460,6 +425,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
+        font.setWeight(75)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_24.addWidget(self.label_7)
@@ -473,7 +439,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setSpacing(6)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.sinusoidal_phase_slider = QtWidgets.QSlider(self.frame_32)
-        self.sinusoidal_phase_slider.setMaximum(10)
         self.sinusoidal_phase_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_phase_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_phase_slider.setObjectName("sinusoidal_phase_slider")
@@ -495,8 +460,6 @@ class Ui_MainWindow(object):
         self.frame_33.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_33.setObjectName("frame_33")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.frame_33)
-        self.horizontalLayout_13.setContentsMargins(0, 20, 0, -1)
-        self.horizontalLayout_13.setSpacing(10)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.add_sinusoidal_button = QtWidgets.QPushButton(self.frame_33)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -508,6 +471,7 @@ class Ui_MainWindow(object):
         self.add_sinusoidal_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.add_sinusoidal_button.setFont(font)
         self.add_sinusoidal_button.setStyleSheet("\n"
 "\n"
@@ -533,17 +497,18 @@ class Ui_MainWindow(object):
         self.delete_sinusoidal_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.delete_sinusoidal_button.setFont(font)
         self.delete_sinusoidal_button.setStyleSheet("\n"
 "\n"
 "QPushButton {\n"
-"    background-color: rgb(236, 0, 0);\n"
+"    background-color: rgb(0, 85, 255);\n"
 "color:rgb(255, 255, 255);\n"
 "border-radius:5px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
-"    background-color: rgb(162, 0, 0)\n"
+"    background-color: rgb(0, 50, 150);\n"
 "}\n"
 "")
         self.delete_sinusoidal_button.setObjectName("delete_sinusoidal_button")
@@ -556,7 +521,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.WindowTabs.setCurrentIndex(0)
+        self.WindowTabs.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -567,21 +532,12 @@ class Ui_MainWindow(object):
         self.import_btn.setText(_translate("MainWindow", "Import"))
         self.clear_btn.setText(_translate("MainWindow", "Clear"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab), _translate("MainWindow", "Viewer"))
-        self.add_sinusoidal_button_2.setText(_translate("MainWindow", "Add"))
+        self.sampling_PushButton.setText(_translate("MainWindow", "Sampling"))
+        self.clear_pushButton.setText(_translate("MainWindow", "Clear"))
         self.label_5.setText(_translate("MainWindow", "Frequency"))
         self.label_6.setText(_translate("MainWindow", "Amplitude"))
         self.label_7.setText(_translate("MainWindow", "Phase"))
         self.add_sinusoidal_button.setText(_translate("MainWindow", "Add"))
-        self.delete_sinusoidal_button.setText(_translate("MainWindow", "Clear"))
+        self.delete_sinusoidal_button.setText(_translate("MainWindow", "Delete"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab_2), _translate("MainWindow", "Composer"))
 from pyqtgraph import PlotWidget
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

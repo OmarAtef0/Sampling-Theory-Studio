@@ -7,6 +7,7 @@ MAX_SAMPLES = 3000
 class SampledSignal():
     '''An object containing sample points array'''
     def __init__(self, sampling_freq=1, amplitude_arr=[]):
+        # Fs = 2 * Fmax
         self.sampling_freq = sampling_freq
         self.max_analog_freq = (1/2)*self.sampling_freq
         self.amplitude_arr = amplitude_arr
@@ -43,7 +44,9 @@ class Signal():
 
         # get the last element and equate with max_freq
         self.max_analog_freq = max(fft_clean_frequencies_array)
+
         return self.max_analog_freq
+
 
 class sinusoidal_wave():
   def __init__(self, index=0, amplitude=1, frequency=1, phase=0):
@@ -80,10 +83,14 @@ class summed_sinusoidals():
       self.xAxis = self.sinusoidals_list[0].xAxis
       self.yAxis_sum = self.sinusoidals_list[0].yAxis
       self.max_frequency = self.sinusoidals_list[0].frequency
-
-    if len(self.sinusoidals_list) > 1:
-      for component  in range(1, len(self.sinusoidals_list)):
-        self.yAxis_sum += self.sinusoidals_list[component].yAxis
-        self.max_frequency = max(self.sinusoidals_list[component].frequency, self.max_frequency)
+      if len(self.sinusoidals_list) > 1:
+        for component  in range(1, len(self.sinusoidals_list)):
+          self.yAxis_sum += self.sinusoidals_list[component].yAxis
+          self.max_frequency = max(self.sinusoidals_list[component].frequency, self.max_frequency)
+          
+    else :
+      self.yAxis_sum=[]
+    
     
     self.yAxis = self.yAxis_sum
+    

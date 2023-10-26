@@ -21,13 +21,16 @@ import numpy as np
 NUM_OF_POINTS = 1000
 
 def plot_sinusoidal_wave(self):
+    #TODO make the plotting more efficient
     amplitude = self.ui.sinusoidal_amplitude_slider.value()
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
     # Set axes and plot
-    xAxis = np.linspace(0, 10, int(NUM_OF_POINTS)) #time
+    xAxis = np.linspace(0, 10, int(NUM_OF_POINTS)) #Time
     yAxis = amplitude * np.sin(2 * np.pi * frequency * xAxis + phase) #wave
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='b', title="Sinusoidal Waveform")
+
+
 
 def add_sinusoidal_wave(self):
   self.sinusoidal_index = self.ui.sinusoidals_signals_menu.currentIndex()
@@ -40,6 +43,8 @@ def add_sinusoidal_wave(self):
     self.sinusoidals_list.append(new_sinusoidal_wave)
     self.sinusoidal_number += 1
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
+
+
   else:
       xAxis = np.linspace(0, 2* np.pi, NUM_OF_POINTS)
       yAxis = amplitude * np.sin(2 * np.pi * frequency * xAxis + phase)
@@ -51,6 +56,8 @@ def add_sinusoidal_wave(self):
 
   sum_sinusoidal_waves(self)
   self.ui.sinusoidals_signals_menu.setCurrentIndex(len(self.sinusoidals_list))
+
+
 
 def update_sinusoidal_menubar(self, input):
   self.sinusoidal_index = input
@@ -81,9 +88,68 @@ def sum_sinusoidal_waves(self):
     self.plots_dict["Summed"].setData(summed_sinusoidals.xAxis, summed_sinusoidals.yAxis, pen='b', title="Sinusoidal Waveform")
 
 
+
+
+
+def deleteSinusoidal(self):
+    if self.sinusoidal_index >= 0 and self.sinusoidal_index < len(self.sinusoidals_list):
+        # Remove the item from the list
+        self.sinusoidals_list.pop(self.sinusoidal_index)
+
+        # Remove the corresponding item from the menu
+        self.ui.sinusoidals_signals_menu.removeItem(self.sinusoidal_index)
+
+        # Update the index to a valid value (e.g., the last item in the list)
+        self.ui.sinusoidals_signals_menu.setCurrentIndex(len(self.sinusoidals_list))
+
+        # Recalculate and update the summed waveform
+        sum_sinusoidal_waves(self)
+    else:
+        print("Invalid index or empty list, cannot delete.")
+
+
+
+# def move_signals_to_plots_dict(self):
+#     # Assuming you have a method to get the data from the main plot widget.
+#     main_plot_data = self.get_main_plot_data()  
+
+#     if main_plot_data:
+#         # Update the corresponding plot in plots_dict with the main plot data.
+#         self.plots_dict["Sinusoidal"].setData(main_plot_data.xAxis, main_plot_data.yAxis, pen='b', title="Sinusoidal Waveform")
+
+# Connect this function to the "Sampling" button
+        
+
+
+# def deleteSinusoidal(self):
+#     self.sinusoidals_list.pop(self.sinusoidal_index)
+#     self.sinusoidals_signals_menu.removeItem(self.sinusoidal_index)
+#     sum_sinusoidal_waves(self)
+
+
+# Connect the "Clear" button to the clear_composer function
+
+
+
 # def remove_sinusoidal_wave(self, index):
 #     pass
 
 
 # def clear_composer(self):
 #     pass
+
+def clear_composer(self):
+    # Clear the "Summed" signal by setting empty arrays for data
+    self.plots_dict["Summed"].setData([], [], pen='b', title="Sinusoidal Waveform")
+
+    # Clear the list of sinusoidal signals
+    self.sinusoidals_list = []
+
+    # Clear the signal menu
+    self.ui.sinusoidals_signals_menu.clear()
+
+    # Reset the signal number
+    self.sinusoidal_number = 1
+
+    # Add a default "Signal 1" to the menu
+    self.ui.sinusoidals_signals_menu.addItem("Signal 1")
