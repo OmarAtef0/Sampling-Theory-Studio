@@ -49,8 +49,8 @@ def move_to_viewer(self, Input):
         self.ui.WindowTabs.setCurrentIndex(0)
         
     # update slider maximum to 4Fmax
-    self.ui.sampling_slider.setMaximum(4*(self.current_signal.max_analog_freq))
-    self.ui.sampling_slider.setSingleStep(self.current_signal.max_analog_freq)
+    self.ui.sampling_slider.setMaximum(int(4 * self.current_signal.max_analog_freq ))
+    self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
 
     # self.ui.fmaxLCD.display(self.current_signal.max_analog_freq)
 
