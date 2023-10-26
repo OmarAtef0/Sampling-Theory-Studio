@@ -73,22 +73,21 @@ def clear(self):
       QtWidgets.QMessageBox.information(self, 'NO SIGNAL', 'No signal to delete')
   else:
       # overwrite variables
-      self.current_signal = []
-      self.interpolated_signal = []
+      self.browsed_signal = SampledSignal()
+      self.current_signal = Signal()
+      self.interpolated_signal = Signal()
+
       self.resampled_time = []
       self.resampled_amplitude = []
-      self.ui.sampling_slider.setValue(self.current_signal.max_analog_freq)
+      self.ui.sampling_slider.setValue(0)
       self.graph_empty = True
-      # self.fmaxLCD.display(0)
 
       # plots to be cleared
       dict_keys = ["Primary1", "Primary2", "Primary3", "Secondary","Error"]
       for index in dict_keys:
           self.plots_dict[index].clear()
 
-
 #################################################################################################
-
 
 def change_sampling_rate(self, freqvalue):
   if freqvalue == 0:  
