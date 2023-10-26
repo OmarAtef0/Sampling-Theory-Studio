@@ -238,6 +238,9 @@ margin: 3px;
                  </item>
                  <item>
                   <widget class="QSlider" name="sampling_slider">
+                   <property name="maximum">
+                    <number>4</number>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -290,6 +293,9 @@ margin: 3px;
                  </item>
                  <item>
                   <widget class="QSlider" name="noise_slider">
+                   <property name="maximum">
+                    <number>4</number>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -400,13 +406,13 @@ QPushButton:hover {
                     <string notr="true">
 
 QPushButton {
-    background-color: rgb(0, 85, 255);
+    background-color: rgb(236, 0, 0);
 color:rgb(255, 255, 255);
 border-radius:5px;
 }
 
 QPushButton:hover {
-    background-color: rgb(0, 50, 150);
+    background-color: rgb(162, 0, 0)
 }
 </string>
                    </property>
@@ -477,7 +483,7 @@ QPushButton:hover {
                <number>10</number>
               </property>
               <item>
-               <widget class="PlotWidget" name="graph1_3" native="true">
+               <widget class="PlotWidget" name="sinusoidal_main_plot_widget" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
@@ -504,6 +510,86 @@ QPushButton:hover {
 margin: 3px;
 </string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frame_35">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_14">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="add_sinusoidal_button_2">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>80</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">
+
+QPushButton {
+    background-color: rgb(0, 85, 255);
+color:rgb(255, 255, 255);
+border-radius:5px;
+}
+
+QPushButton:hover {
+    background-color: rgb(0, 50, 150);
+}
+</string>
+                   </property>
+                   <property name="text">
+                    <string>Add</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -539,8 +625,23 @@ margin: 3px;
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_25">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <widget class="QComboBox" name="comboBox"/>
+                  <widget class="QComboBox" name="sinusoidals_signals_menu"/>
                  </item>
                 </layout>
                </widget>
@@ -560,8 +661,23 @@ margin: 3px;
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_19">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <widget class="PlotWidget" name="graph1_4" native="true">
+                  <widget class="PlotWidget" name="sinusoidal_secondary_plot_widget" native="true">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
@@ -609,7 +725,7 @@ margin: 3px;
                   <number>0</number>
                  </property>
                  <property name="topMargin">
-                  <number>20</number>
+                  <number>10</number>
                  </property>
                  <property name="rightMargin">
                   <number>0</number>
@@ -682,7 +798,10 @@ margin: 3px;
                      <number>0</number>
                     </property>
                     <item>
-                     <widget class="QSlider" name="horizontalSlider_8">
+                     <widget class="QSlider" name="sinusoidal_frequency_slider">
+                      <property name="maximum">
+                       <number>10</number>
+                      </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
                       </property>
@@ -692,7 +811,7 @@ margin: 3px;
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLCDNumber" name="lcdNumber_8">
+                     <widget class="QLCDNumber" name="sinusoidal_frequency_LCD">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
@@ -805,7 +924,10 @@ margin: 3px;
                      <number>0</number>
                     </property>
                     <item>
-                     <widget class="QSlider" name="horizontalSlider_9">
+                     <widget class="QSlider" name="sinusoidal_amplitude_slider">
+                      <property name="maximum">
+                       <number>10</number>
+                      </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
                       </property>
@@ -815,7 +937,7 @@ margin: 3px;
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLCDNumber" name="lcdNumber_9">
+                     <widget class="QLCDNumber" name="sinusoidal_amplitude_LCD">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
@@ -928,7 +1050,10 @@ margin: 3px;
                      <number>0</number>
                     </property>
                     <item>
-                     <widget class="QSlider" name="horizontalSlider_10">
+                     <widget class="QSlider" name="sinusoidal_phase_slider">
+                      <property name="maximum">
+                       <number>10</number>
+                      </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
                       </property>
@@ -938,7 +1063,7 @@ margin: 3px;
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLCDNumber" name="lcdNumber_10">
+                     <widget class="QLCDNumber" name="sinusoidal_phase_LCD">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                         <horstretch>0</horstretch>
@@ -971,8 +1096,20 @@ margin: 3px;
                  <enum>QFrame::Raised</enum>
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout_13">
+                 <property name="spacing">
+                  <number>10</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>20</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <widget class="QPushButton" name="linkButton_2">
+                  <widget class="QPushButton" name="add_sinusoidal_button">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
@@ -1016,7 +1153,7 @@ QPushButton:hover {
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="linkButton">
+                  <widget class="QPushButton" name="delete_sinusoidal_button">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
@@ -1044,18 +1181,18 @@ QPushButton:hover {
                     <string notr="true">
 
 QPushButton {
-    background-color: rgb(0, 85, 255);
+    background-color: rgb(236, 0, 0);
 color:rgb(255, 255, 255);
 border-radius:5px;
 }
 
 QPushButton:hover {
-    background-color: rgb(0, 50, 150);
+    background-color: rgb(162, 0, 0)
 }
 </string>
                    </property>
                    <property name="text">
-                    <string>Delete</string>
+                    <string>Clear</string>
                    </property>
                   </widget>
                  </item>
