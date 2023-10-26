@@ -46,6 +46,7 @@ class SamplingStudioApp(QMainWindow):
                         "Sinusoidal": self.ui.sinusoidal_secondary_plot_widget.plot(),
                         "Summed": self.ui.sinusoidal_main_plot_widget.plot()
                         }
+    
     ''' 
     Primary1 is the original signal
     Secondary1 is the resampled points 

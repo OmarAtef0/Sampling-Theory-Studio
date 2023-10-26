@@ -49,7 +49,7 @@ def move_to_viewer(self, Input):
         self.ui.WindowTabs.setCurrentIndex(0)
         
     # update slider maximum to 4Fmax
-    self.ui.sampling_slider.setMaximum(int(4 * self.current_signal.max_analog_freq ))
+    self.ui.sampling_slider.setMaximum(int(2 * self.current_signal.max_analog_freq ))
     self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
 
     # self.ui.fmaxLCD.display(self.current_signal.max_analog_freq)
@@ -115,7 +115,8 @@ def change_sampling_rate(self, freqvalue):
       self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
       self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-      self.plots_dict["Error"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+      print(self.current_signal.amplitude- self.interpolated_amplitude)
+      self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude- self.interpolated_amplitude), pen=self.pen)
 
 
 def sinc_interpolation(input_amplitude, input_time, original_time):
