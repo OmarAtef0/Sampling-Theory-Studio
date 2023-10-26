@@ -21,16 +21,13 @@ import numpy as np
 NUM_OF_POINTS = 1000
 
 def plot_sinusoidal_wave(self):
-    #TODO make the plotting more efficient
     amplitude = self.ui.sinusoidal_amplitude_slider.value()
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
     # Set axes and plot
-    xAxis = np.linspace(0, 10, int(NUM_OF_POINTS)) #Time
+    xAxis = np.linspace(0, 10, int(NUM_OF_POINTS)) #time
     yAxis = amplitude * np.sin(2 * np.pi * frequency * xAxis + phase) #wave
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='b', title="Sinusoidal Waveform")
-
-
 
 def add_sinusoidal_wave(self):
   self.sinusoidal_index = self.ui.sinusoidals_signals_menu.currentIndex()
@@ -43,8 +40,6 @@ def add_sinusoidal_wave(self):
     self.sinusoidals_list.append(new_sinusoidal_wave)
     self.sinusoidal_number += 1
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
-
-
   else:
       xAxis = np.linspace(0, 2* np.pi, NUM_OF_POINTS)
       yAxis = amplitude * np.sin(2 * np.pi * frequency * xAxis + phase)
@@ -56,8 +51,6 @@ def add_sinusoidal_wave(self):
 
   sum_sinusoidal_waves(self)
   self.ui.sinusoidals_signals_menu.setCurrentIndex(len(self.sinusoidals_list))
-
-
 
 def update_sinusoidal_menubar(self, input):
   self.sinusoidal_index = input
@@ -86,7 +79,6 @@ def sum_sinusoidal_waves(self):
     summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)   
     # max_frequency = classes.summed_sinusoidals.max_frequency
     self.plots_dict["Summed"].setData(summed_sinusoidals.xAxis, summed_sinusoidals.yAxis, pen='b', title="Sinusoidal Waveform")
-
 
 
 # def remove_sinusoidal_wave(self, index):

@@ -40,22 +40,31 @@ def browse(self):
 
 def move_to_viewer(self, Input):
     if Input == "composer":
-        self.original_signal = Signal(self.summed_signal.xAxis,self.summed_signal.yAxis, self.summed_signal.max_analog_freq)
+        self.current_signal = Signal(self.summed_signal.xAxis,self.summed_signal.yAxis, self.summed_signal.max_analog_freq)
         self.ui.WindowTabs.setCurrentIndex(0)
 
     elif Input == "browse":
-        self.original_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)
-        self.original_signal.get_max_freq()  
+        self.current_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)
+        self.current_signal.get_max_freq()  
         self.ui.WindowTabs.setCurrentIndex(0)
         
-    # update slider maximum to 3Fmax
-    self.ui.sampling_slider.setMaximum(2*(self.original_signal.max_analog_freq))
-    # self.ui.fmaxLCD.display(self.original_signal.max_analog_freq)
+    # update slider maximum to 4Fmax
+    self.ui.sampling_slider.setMaximum(4*(self.current_signal.max_analog_freq))
+    self.ui.sampling_slider.setSingleStep(self.current_signal.max_analog_freq)
+
+    # self.ui.fmaxLCD.display(self.current_signal.max_analog_freq)
 
     # initialize plots
-    self.plots_dict["Primary1"].setData(self.original_signal.time, self.original_signal.amplitude)
-    self.plots_dict["Secondary"].setData(self.original_signal.time, self.original_signal.amplitude)
-    self.plots_dict["Error"].setData(self.original_signal.time, self.original_signal.amplitude)
+    self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude)
+
+    self.pen = pg.mkPen(color=(0, 200, 0), width=0)
+    self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
+
+    self.pen = pg.mkPen(color=(0, 200, 0), width=2)
+    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+
+    self.plots_dict["Error"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+    
     self.graph_empty = False
     self.graph_deleted = False
 
@@ -64,11 +73,11 @@ def clear(self):
       QtWidgets.QMessageBox.information(self, 'NO SIGNAL', 'No signal to delete')
   else:
       # overwrite variables
-      self.original_signal = []
+      self.current_signal = []
       self.interpolated_signal = []
       self.resampled_time = []
       self.resampled_amplitude = []
-      self.ui.sampling_slider.setValue(1)
+      self.ui.sampling_slider.setValue(self.current_signal.max_analog_freq)
       self.graph_empty = True
       # self.fmaxLCD.display(0)
 
@@ -89,25 +98,26 @@ def change_sampling_rate(self, freqvalue):
       QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
   else:
       returned_tuple = ()
-      returned_tuple = downsample(self.original_signal.time, self.original_signal.amplitude, freqvalue)
+      returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
       self.resampled_amplitude = np.array(returned_tuple[1])
       self.resampled_time = np.array(returned_tuple[0])
 
       # sinc interpolation
-      self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.original_signal.time)
+      self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
 
       # refresh all viewer graphs
-      self.pen = pg.mkPen(color=(150, 150, 150), width=2,style=QtCore.Qt.DotLine)
-      self.plots_dict["Primary1"].setData(self.original_signal.time, self.original_signal.amplitude, pen=self.pen)
-
       self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-      self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
+      self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
       self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-      self.plots_dict["Primary3"].setData(self.original_signal.time, self.interpolated_amplitude, pen=self.pen)
+      self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
 
-      self.plots_dict["Secondary"].setData(self.original_signal.time, self.interpolated_amplitude, pen=self.pen)
-        
+      self.pen = pg.mkPen(color=(150, 150, 150), width=2)
+      self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
+
+      self.pen = pg.mkPen(color=(0, 200, 0), width=2)
+      self.plots_dict["Error"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+
 
 def sinc_interpolation(input_amplitude, input_time, original_time):
     '''Whittaker Shannon interpolation formula linked here:
