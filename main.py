@@ -40,7 +40,7 @@ class SamplingStudioApp(QMainWindow):
     # initialize graph objects array/dict
     self.plots_dict = {
                         "Primary": self.ui.primary_plot.plot(),
-                        "Secondary1": self.ui.reconstructed_plot.plot(),
+                        "Secondary1": self.ui.primary_plot.plot(),
                         "Secondary2": self.ui.reconstructed_plot.plot(),
                         "Error": self.ui.error_plot.plot(),
                         "Sinusoidal": self.ui.sinusoidal_secondary_plot_widget.plot(),
