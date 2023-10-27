@@ -1,11 +1,10 @@
 import sys
 import csv
 from PyQt5 import QtWidgets , QtCore
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QSlider , QColorDialog, QAction, QTextEdit
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QSlider , QColorDialog, QAction, QTextEdit, QPushButton, QProgressBar, QDialog, QVBoxLayout
 from PyQt5.QtCore import QTimer,Qt, QPointF
 from PyQt5.QtGui import QColor, QIcon, QCursor, QKeySequence
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QProgressBar, QDialog, QVBoxLayout
 import pyqtgraph as pg
 import numpy as np
 from pyqtgraph import PlotWidget
@@ -40,15 +39,16 @@ def browse(self):
 
 def move_to_viewer(self, Input):
     if Input == "composer":
-        self.current_signal = Signal(self.summed_signal.xAxis,self.summed_signal.yAxis, self.summed_signal.max_analog_freq)
+        self.current_signal = Signal(self.summed_sinusoidals.xAxis, self.summed_sinusoidals.yAxis, self.summed_sinusoidals.get_max_analog_frequency())
         self.ui.WindowTabs.setCurrentIndex(0)
+        self.ui.import_btn.setDisabled(True)
 
     elif Input == "browse":
         self.current_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)
         self.current_signal.get_max_freq()  
         self.ui.WindowTabs.setCurrentIndex(0)
         
-    # update slider maximum to 4Fmax
+    # update slider maximum to 10Fmax
     self.ui.sampling_slider.setMaximum(int(10 * self.current_signal.max_analog_freq ))
     self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
 
@@ -100,6 +100,7 @@ def change_sampling_rate(self, freqvalue):
       returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
       self.resampled_amplitude = np.array(returned_tuple[1])
       self.resampled_time = np.array(returned_tuple[0])
+
 
       # sinc interpolation
       self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
