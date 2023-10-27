@@ -46,9 +46,6 @@ def add_noise(self, noise_slider_value):
         signal = np.array(self.current_signal.amplitude)
         noise = np.random.normal(0, abs(signal), len(signal))
         noisy_signal = signal + noise * noise_slider_value
-        # print("current: ",signal[0])
-        # print("noisy: ",noisy_signal[0])
-        # print("diff: ",signal[0] - noisy_signal[0])
         self.current_signal.amplitude = noisy_signal
 
     # refresh all viewer graphs
@@ -104,8 +101,6 @@ def clear(self):
       for index in dict_keys:
           self.plots_dict[index].clear()
 
-#################################################################################################
-
 def refresh_graphs(self):
     # refresh all viewer graphs
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
@@ -126,20 +121,23 @@ def refresh_graphs(self):
     self.plots_dict["Error"].getViewBox().setYRange(primary_y_min, primary_y_max)
     self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.interpolated_amplitude), pen=self.pen)
 
+#################################################################################################
+
 def change_sampling_rate(self, freqvalue):
-  if freqvalue == 0:  
-    freqvalue = 1
+#   if freqvalue == 0:  
+#     freqvalue = 1
 
   if self.graph_empty:
     QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
   else:
     returned_tuple = ()
     returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
-    self.resampled_amplitude = np.array(returned_tuple[1])
     self.resampled_time = np.array(returned_tuple[0])
-
+    self.resampled_amplitude = np.array(returned_tuple[1])
+    
     # sinc interpolation
     self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
+
 
     # refresh all viewer graphs
     refresh_graphs(self)
@@ -148,31 +146,32 @@ def sinc_interpolation(input_amplitude, input_time, original_time):
     '''Whittaker Shannon interpolation formula linked here:
       https://en.wikipedia.org/wiki/Whittaker%E2%80%93Shannon_interpolation_formula '''
 
-    if len(input_amplitude) != len(input_time):
-        print('not same')
-
     # Find the period
     if len(input_time) != 0:
         T = input_time[1] - input_time[0]
 
-    # the equation
+    # The equation 
+    # original_time - downsampled_time -> divide by period -> np.sinc() -> dot product by input_amplitude
+
+    # The goal of this code is to create a matrix sincM with dimensions (M, N)
     sincM = np.tile(original_time, (len(input_time), 1)) - np.tile(input_time[:, np.newaxis], (1, len(original_time)))
-    output_amplitude = np.dot(input_amplitude, np.sinc(sincM/T))
+    
+    # sinc(x) = sin(pi * x) / (pi * x)
+    output_amplitude = np.dot(input_amplitude, np.sinc(sincM / T))
     return output_amplitude
 
-def downsample(array_x, array_y, freq):
-    '''Returns a tuple containting downsampled (array_x, array_y) '''
-
+def downsample(arr_x, arr_y, freq):
+    '''Returns a tuple containting downsampled (arr_x, arr_y) '''
     resampled_x = []
     resampled_y = []
 
-    # divide total samples over maximum time to get 1/period
-    max_sampling_freq = len(array_x)/max(array_x) 
-    length = len(array_x)
-    step = round(max_sampling_freq/freq)
+    # divide total samples over maximum time to get 1 / period
+    length = len(arr_x)
+    max_sampling_freq = length / max(arr_x) 
+    step = round(max_sampling_freq / freq)
 
     for index in range(0, length, step):
-        resampled_x.append(array_x[index])
-        resampled_y.append(array_y[index])
+        resampled_x.append(arr_x[index])
+        resampled_y.append(arr_y[index])
 
     return resampled_x, resampled_y

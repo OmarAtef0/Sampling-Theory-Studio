@@ -58,9 +58,9 @@ class SamplingStudioApp(QMainWindow):
     '''
 
     #mouse
-    # self.ui.primary_plot.setMouseEnabled(x=False, y=False)
-    # self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
-    # self.ui.error_plot.setMouseEnabled(x=False, y=False)
+    self.ui.primary_plot.setMouseEnabled(x=False, y=False)
+    self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
+    self.ui.error_plot.setMouseEnabled(x=False, y=False)
 
     self.ui.clear_btn.clicked.connect(lambda: viewer.clear(self))
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
