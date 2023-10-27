@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="WindowTabs">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -228,7 +228,6 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -281,7 +280,6 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -351,7 +349,6 @@ margin: 3px;
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -396,7 +393,6 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -419,7 +415,39 @@ QPushButton:hover {
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Fmax</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLCDNumber" name="fmaxLCD">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>75</width>
+                  <height>35</height>
+                 </size>
+                </property>
+                <property name="smallDecimalPoint">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
              </layout>
@@ -664,7 +692,6 @@ margin: 3px;
                       <property name="font">
                        <font>
                         <pointsize>14</pointsize>
-                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -788,7 +815,6 @@ margin: 3px;
                       <property name="font">
                        <font>
                         <pointsize>14</pointsize>
-                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -912,7 +938,6 @@ margin: 3px;
                       <property name="font">
                        <font>
                         <pointsize>14</pointsize>
-                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -1014,7 +1039,6 @@ margin: 3px;
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1059,7 +1083,6 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>

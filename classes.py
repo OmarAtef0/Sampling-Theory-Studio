@@ -19,7 +19,6 @@ class SampledSignal():
         for index in range(self.total_samples):
             self.time_array.append(index/self.sampling_freq)
 
-
 class Signal():
     '''An object containing the generic signal'''
     def __init__(self, time=[] ,amplitude=[], max_analog_freq=1):
@@ -46,7 +45,6 @@ class Signal():
         self.max_analog_freq = max(fft_clean_frequencies_array)
 
         return self.max_analog_freq
-
 
 class sinusoidal_wave():
   def __init__(self, index=0, amplitude=1, frequency=1, phase=0):
@@ -90,7 +88,6 @@ class summed_sinusoidals():
           
     else :
       self.yAxis_sum=[]
-    
     
     self.yAxis = self.yAxis_sum
     

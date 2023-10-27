@@ -25,12 +25,16 @@ class SamplingStudioApp(QMainWindow):
     # Set up the UI
     self.ui = Ui_MainWindow()
     self.ui.setupUi(self)  
-
-    # for deleted signal/empty Graph
+    
     self.graph_empty = True
+    self.resampled_time = []
+    self.resampled_amplitude = []
+    self.interpolated_amplitude = []
     self.browsed_signal = SampledSignal()
     self.current_signal = Signal()
     self.interpolated_signal = Signal()
+
+    self.original_amplitude = []
 
     self.sinusoidal_index = 0
     self.sinusoidal_number = 1
@@ -54,22 +58,22 @@ class SamplingStudioApp(QMainWindow):
     '''
 
     #mouse
-    self.ui.primary_plot.setMouseEnabled(x=False, y=False)
-    self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
-    self.ui.error_plot.setMouseEnabled(x=False, y=False)
+    # self.ui.primary_plot.setMouseEnabled(x=False, y=False)
+    # self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
+    # self.ui.error_plot.setMouseEnabled(x=False, y=False)
 
     self.ui.clear_btn.clicked.connect(lambda: viewer.clear(self))
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
     # Sampling frequency control
-    self.ui.sampling_slider.setMinimum(self.current_signal.max_analog_freq)
+    self.ui.sampling_slider.setMinimum(0)
     self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
     self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
 
     # SNR control
-    self.ui.noise_slider.setMinimum(1)
-    # self.ui.noise_slider.valueChanged.connect()
-    self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value()))
+    self.ui.noise_slider.setMinimum(0)
+    self.ui.noise_slider.valueChanged.connect(lambda: viewer.add_noise(self, self.ui.noise_slider.value() * 0.001))
+    self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value() * 0.001))
 
     # Sinsusoidal_Sliders
     self.ui.sinusoidal_frequency_slider.valueChanged.connect(lambda: composer.plot_sinusoidal_wave(self))
@@ -83,10 +87,13 @@ class SamplingStudioApp(QMainWindow):
 
     self.ui.add_sinusoidal_button.clicked.connect(lambda: composer.add_sinusoidal_wave(self))
     self.ui.sinusoidals_signals_menu.currentIndexChanged.connect(lambda: composer.update_sinusoidal_menubar(self, 
-                                                                                            self.ui.sinusoidals_signals_menu.currentIndex()))
+    self.ui.sinusoidals_signals_menu.currentIndex()))
+
     self.ui.clear_pushButton.clicked.connect(lambda: composer.clear_composer(self))
     self.ui.delete_sinusoidal_button.clicked.connect(lambda: composer.deleteSinusoidal(self))
-    self.ui.sampling_PushButton.clicked.connect(lambda: composer.move_signals_to_plots_dict(self))
+    self.ui.sampling_PushButton.clicked.connect(lambda: viewer.move_to_viewer(self, "composer"))
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = SamplingStudioApp()

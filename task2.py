@@ -47,7 +47,6 @@ class Ui_MainWindow(object):
         self.primary_plot.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.primary_plot.setAutoFillBackground(False)
         self.primary_plot.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-        
 "margin: 3px;\n"
 "")
         self.primary_plot.setObjectName("primary_plot")
@@ -111,7 +110,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
-        font.setWeight(75)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_4.addWidget(self.label_4)
@@ -139,7 +137,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
-        font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_4.addWidget(self.label_3)
@@ -173,7 +170,6 @@ class Ui_MainWindow(object):
         self.import_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.import_btn.setFont(font)
         self.import_btn.setStyleSheet("\n"
 "\n"
@@ -199,7 +195,6 @@ class Ui_MainWindow(object):
         self.clear_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.clear_btn.setFont(font)
         self.clear_btn.setStyleSheet("\n"
 "\n"
@@ -215,7 +210,24 @@ class Ui_MainWindow(object):
 "")
         self.clear_btn.setObjectName("clear_btn")
         self.horizontalLayout_4.addWidget(self.clear_btn)
+        self.label_8 = QtWidgets.QLabel(self.frame_3)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        self.label_8.setFont(font)
+        self.label_8.setObjectName("label_8")
+        self.horizontalLayout_4.addWidget(self.label_8)
         self.horizontalLayout_3.addWidget(self.frame_3)
+        self.fmaxLCD = QtWidgets.QLCDNumber(self.controls)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fmaxLCD.sizePolicy().hasHeightForWidth())
+        self.fmaxLCD.setSizePolicy(sizePolicy)
+        self.fmaxLCD.setMaximumSize(QtCore.QSize(75, 35))
+        self.fmaxLCD.setSmallDecimalPoint(False)
+        self.fmaxLCD.setObjectName("fmaxLCD")
+        self.horizontalLayout_3.addWidget(self.fmaxLCD)
         self.verticalLayout_2.addWidget(self.controls)
         self.horizontalLayout_2.addWidget(self.tab1)
         self.WindowTabs.addTab(self.tab, "")
@@ -325,7 +337,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_20.addWidget(self.label_5)
@@ -375,7 +386,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_22.addWidget(self.label_6)
@@ -425,7 +435,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_24.addWidget(self.label_7)
@@ -471,7 +480,6 @@ class Ui_MainWindow(object):
         self.add_sinusoidal_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.add_sinusoidal_button.setFont(font)
         self.add_sinusoidal_button.setStyleSheet("\n"
 "\n"
@@ -497,7 +505,6 @@ class Ui_MainWindow(object):
         self.delete_sinusoidal_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.delete_sinusoidal_button.setFont(font)
         self.delete_sinusoidal_button.setStyleSheet("\n"
 "\n"
@@ -521,7 +528,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.WindowTabs.setCurrentIndex(1)
+        self.WindowTabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -531,6 +538,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "SNR"))
         self.import_btn.setText(_translate("MainWindow", "Import"))
         self.clear_btn.setText(_translate("MainWindow", "Clear"))
+        self.label_8.setText(_translate("MainWindow", "Fmax"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab), _translate("MainWindow", "Viewer"))
         self.sampling_PushButton.setText(_translate("MainWindow", "Sampling"))
         self.clear_pushButton.setText(_translate("MainWindow", "Clear"))
@@ -541,3 +549,13 @@ class Ui_MainWindow(object):
         self.delete_sinusoidal_button.setText(_translate("MainWindow", "Delete"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab_2), _translate("MainWindow", "Composer"))
 from pyqtgraph import PlotWidget
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

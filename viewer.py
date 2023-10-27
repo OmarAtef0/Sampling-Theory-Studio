@@ -23,10 +23,8 @@ def browse(self):
     
     with open(path, 'r') as csvFile:    # 'r' its a mode for reading and writing
         csvReader = csv.reader(csvFile, delimiter=',')
-
         # neglect the first line in the csv file
         next(csvReader)
-
         for line in csvReader:
             if len(time) > MAX_SAMPLES:
                 break
@@ -38,6 +36,26 @@ def browse(self):
     self.browsed_signal = SampledSignal(self.fsample, amplitude)
     move_to_viewer(self, "browse")
 
+def add_noise(self, noise_slider_value):
+    if self.original_amplitude == []:
+        self.original_amplitude = self.current_signal.amplitude
+    
+    if noise_slider_value == 0:
+        self.current_signal.amplitude = self.original_amplitude
+    else:
+        signal = np.array(self.current_signal.amplitude)
+        noise = np.random.normal(0, abs(signal), len(signal))
+        noisy_signal = signal + noise * noise_slider_value
+        # print("current: ",signal[0])
+        # print("noisy: ",noisy_signal[0])
+        # print("diff: ",signal[0] - noisy_signal[0])
+        self.current_signal.amplitude = noisy_signal
+
+    # refresh all viewer graphs
+    refresh_graphs(self)
+    change_sampling_rate(self, self.ui.sampling_slider.value())
+    self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
+
 def move_to_viewer(self, Input):
     if Input == "composer":
         self.current_signal = Signal(self.summed_signal.xAxis,self.summed_signal.yAxis, self.summed_signal.max_analog_freq)
@@ -48,25 +66,22 @@ def move_to_viewer(self, Input):
         self.current_signal.get_max_freq()  
         self.ui.WindowTabs.setCurrentIndex(0)
         
-    # update slider maximum to 10Fmax
-    self.ui.sampling_slider.setMaximum(int(10 * self.current_signal.max_analog_freq ))
+    # update slider maximum to 4Fmax
+    self.ui.sampling_slider.setMaximum(int(4 * self.current_signal.max_analog_freq ))
     self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
-
-    # self.ui.fmaxLCD.display(self.current_signal.max_analog_freq)
-
+    self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
+    print("2*Fmax = ", int(2*self.current_signal.max_analog_freq))
+    
     # initialize plots
+    self.graph_empty = False
+
     self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
     self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
-    self.pen = pg.mkPen(color=(0, 200, 0), width=2)
+    self.pen = pg.mkPen(color=(0, 200, 0), width=1)
     self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
-
-    
-    
-    self.graph_empty = False
-    self.graph_deleted = False
 
 def clear(self):
   if self.graph_empty == True:
@@ -80,6 +95,8 @@ def clear(self):
       self.resampled_time = []
       self.resampled_amplitude = []
       self.ui.sampling_slider.setValue(0)
+      self.ui.noise_slider.setValue(0)
+      self.ui.fmaxLCD.display(0)
       self.graph_empty = True
 
       # plots to be cleared
@@ -89,42 +106,43 @@ def clear(self):
 
 #################################################################################################
 
-def change_sampling_rate(self, freqvalue):
-  if freqvalue == 0:  
-      freqvalue = 1
+def refresh_graphs(self):
+    # refresh all viewer graphs
+    self.pen = pg.mkPen(color=(0, 200, 0), width=0)
+    self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
-  if self.graph_empty:
-      QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
-  else:
-      returned_tuple = ()
-      returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
-      self.resampled_amplitude = np.array(returned_tuple[1])
-      self.resampled_time = np.array(returned_tuple[0])
+    self.pen = pg.mkPen(color=(0, 200, 0), width=2)
+    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
 
-      # sinc interpolation
-      self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
+    self.pen = pg.mkPen(color=(150, 150, 150), width=2)
+    self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
-      # refresh all viewer graphs
-      self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-      self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
-
-      self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-      self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
-
-      self.pen = pg.mkPen(color=(150, 150, 150), width=2)
-      self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
-
-      self.pen = pg.mkPen(color=(0, 200, 250), width=2)
-      primary_plot = self.plots_dict["Primary"].getViewBox()
-      error_plot = self.plots_dict["Error"]
+    self.pen = pg.mkPen(color=(0, 200, 250), width=2)
 
     # Get the y-axis range of the "Primary" plot
-      primary_y_min, primary_y_max = primary_plot.viewRange()[1]
+    primary_y_min, primary_y_max = self.plots_dict["Primary"].getViewBox().viewRange()[1]
 
     # Set the same y-axis range for the "Error" plot
-      error_plot.getViewBox().setYRange(primary_y_min, primary_y_max)
-      self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude- self.interpolated_amplitude), pen=self.pen)
+    self.plots_dict["Error"].getViewBox().setYRange(primary_y_min, primary_y_max)
+    self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.interpolated_amplitude), pen=self.pen)
 
+def change_sampling_rate(self, freqvalue):
+  if freqvalue == 0:  
+    freqvalue = 1
+
+  if self.graph_empty:
+    QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
+  else:
+    returned_tuple = ()
+    returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
+    self.resampled_amplitude = np.array(returned_tuple[1])
+    self.resampled_time = np.array(returned_tuple[0])
+
+    # sinc interpolation
+    self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
+
+    # refresh all viewer graphs
+    refresh_graphs(self)
 
 def sinc_interpolation(input_amplitude, input_time, original_time):
     '''Whittaker Shannon interpolation formula linked here:

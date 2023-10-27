@@ -57,8 +57,6 @@ def add_sinusoidal_wave(self):
   sum_sinusoidal_waves(self)
   self.ui.sinusoidals_signals_menu.setCurrentIndex(len(self.sinusoidals_list))
 
-
-
 def update_sinusoidal_menubar(self, input):
   self.sinusoidal_index = input
   # Set slider values to appropriate positions when user selects already added signal
@@ -86,10 +84,6 @@ def sum_sinusoidal_waves(self):
     summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)   
     # max_frequency = classes.summed_sinusoidals.max_frequency
     self.plots_dict["Summed"].setData(summed_sinusoidals.xAxis, summed_sinusoidals.yAxis, pen='b', title="Sinusoidal Waveform")
-
-
-
-
 
 def deleteSinusoidal(self):
     if self.sinusoidal_index >= 0 and self.sinusoidal_index < len(self.sinusoidals_list):
