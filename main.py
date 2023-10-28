@@ -65,7 +65,7 @@ class SamplingStudioApp(QMainWindow):
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
     # Sampling frequency control
-    self.ui.sampling_slider.setMinimum(self.current_signal.max_analog_freq)
+    self.ui.sampling_slider.setMinimum(1)
     self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
     self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
 

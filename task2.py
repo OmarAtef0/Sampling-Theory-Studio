@@ -347,32 +347,6 @@ class Ui_MainWindow(object):
 "")
         self.add_sinusoidal_button.setObjectName("add_sinusoidal_button")
         self.horizontalLayout.addWidget(self.add_sinusoidal_button)
-        self.apply_sinusoidal_button = QtWidgets.QPushButton(self.frame_4)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.apply_sinusoidal_button.sizePolicy().hasHeightForWidth())
-        self.apply_sinusoidal_button.setSizePolicy(sizePolicy)
-        self.apply_sinusoidal_button.setMinimumSize(QtCore.QSize(80, 30))
-        self.apply_sinusoidal_button.setMaximumSize(QtCore.QSize(200, 35))
-        font = QtGui.QFont()
-        font.setBold(True)
-        font.setWeight(75)
-        self.apply_sinusoidal_button.setFont(font)
-        self.apply_sinusoidal_button.setStyleSheet("\n"
-"\n"
-"QPushButton {\n"
-"    background-color: rgb(0, 85, 255);\n"
-"color:rgb(255, 255, 255);\n"
-"border-radius:5px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(0, 50, 150);\n"
-"}\n"
-"")
-        self.apply_sinusoidal_button.setObjectName("apply_sinusoidal_button")
-        self.horizontalLayout.addWidget(self.apply_sinusoidal_button)
         self.delete_sinusoidal_button = QtWidgets.QPushButton(self.frame_4)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -630,7 +604,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.WindowTabs.setCurrentIndex(1)
+        self.WindowTabs.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -643,7 +617,6 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Fmax"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab), _translate("MainWindow", "Viewer"))
         self.add_sinusoidal_button.setText(_translate("MainWindow", "Add"))
-        self.apply_sinusoidal_button.setText(_translate("MainWindow", "Apply"))
         self.delete_sinusoidal_button.setText(_translate("MainWindow", "Delete"))
         self.label_7.setText(_translate("MainWindow", "Frequency"))
         self.label_6.setText(_translate("MainWindow", "Amplitude"))
@@ -652,3 +625,13 @@ class Ui_MainWindow(object):
         self.clear_composer_button.setText(_translate("MainWindow", "Clear"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab_2), _translate("MainWindow", "Composer"))
 from pyqtgraph import PlotWidget
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

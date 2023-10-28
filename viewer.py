@@ -67,6 +67,7 @@ def move_to_viewer(self, Input):
     # update slider maximum to 4Fmax
     self.ui.sampling_slider.setMaximum(int(4 * self.current_signal.max_analog_freq ))
     self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
+    self.ui.sampling_slider.setPageStep(int(self.current_signal.max_analog_freq))
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
     print("2*Fmax = ", int(2*self.current_signal.max_analog_freq))
     
