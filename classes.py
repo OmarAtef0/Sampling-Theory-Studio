@@ -3,6 +3,7 @@ import numpy as np
 
 # GLOBAL CONSTANTS
 MAX_SAMPLES = 3000
+NUM_OF_POINTS = 1000
 
 class SampledSignal():
     '''An object containing sample points array'''
@@ -52,8 +53,8 @@ class sinusoidal_wave():
       self.frequency= frequency
       self.phase= phase
       self.PI = np.pi
-      self.xAxis = np.linspace(0, np.pi*2, 1000)
-      self.yAxis = self.amplitude * np.sin(2*self.PI*self.frequency*self.xAxis + self.phase*(self.PI/180))
+      self.xAxis = np.linspace(0, np.pi*2, NUM_OF_POINTS)
+      self.yAxis = self.amplitude * np.sin(self.frequency*self.xAxis + self.phase*(self.PI/180))
   
   # def creat_sin_wave(self):
   #   if(self.kind == "Sinusoidal"):

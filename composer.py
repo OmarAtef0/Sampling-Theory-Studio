@@ -10,7 +10,7 @@ def plot_sinusoidal_wave(self):
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
     # Set axes and plot
-    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS)) #Time
+    xAxis = np.linspace(0, 2 * np.pi, NUM_OF_POINTS) #Time
     yAxis = amplitude * np.sin(frequency * xAxis + phase) #wave
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='w', title="Sinusoidal Waveform")
 
