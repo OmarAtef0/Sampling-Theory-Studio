@@ -50,8 +50,8 @@ def add_noise(self, noise_slider_value):
 
     # refresh all viewer graphs
     refresh_graphs(self)
-    # change_sampling_rate(self, self.ui.sampling_slider.value())
-    # self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
+    change_sampling_rate(self, self.ui.sampling_slider.value())
+    self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
 
 def move_to_viewer(self, Input):
     if Input == "composer":
