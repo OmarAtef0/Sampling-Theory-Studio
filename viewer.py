@@ -92,31 +92,31 @@ def clear(self):
       self.resampled_time = []
       self.resampled_amplitude = []
       self.original_amplitude = []
-      self.ui.sampling_slider.setValue(0)
+      self.ui.sampling_slider.setValue(1)
       self.ui.noise_slider.setValue(0)
       self.ui.fmaxLCD.display(0)
       self.graph_empty = True
 
       # plots to be cleared
-      dict_keys = ["Primary", "Secondary1","Secondary2","Error"]
+      dict_keys = ["Primary1", "Primary2","Secondary1","Error"]
       for index in dict_keys:
           self.plots_dict[index].clear()
 
 def refresh_graphs(self):
     # refresh all viewer graphs
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-    self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
+    self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
+    self.plots_dict["Secondary1"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
 
     self.pen = pg.mkPen(color=(150, 150, 150), width=2)
-    self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
+    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 250), width=2)
 
     # Get the y-axis range of the "Primary" plot
-    primary_y_min, primary_y_max = self.plots_dict["Primary"].getViewBox().viewRange()[1]
+    primary_y_min, primary_y_max = self.plots_dict["Primary1"].getViewBox().viewRange()[1]
 
     # Set the same y-axis range for the "Error" plot
     self.plots_dict["Error"].getViewBox().setYRange(primary_y_min, primary_y_max)
@@ -138,7 +138,6 @@ def change_sampling_rate(self, freqvalue):
     
     # sinc interpolation
     self.reconstructed_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
-
 
     # refresh all viewer graphs
     refresh_graphs(self)

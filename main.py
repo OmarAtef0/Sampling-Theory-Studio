@@ -66,7 +66,7 @@ class SamplingStudioApp(QMainWindow):
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
     # Sampling frequency control
-    self.ui.sampling_slider.setMinimum(0)
+    self.ui.sampling_slider.setMinimum(1)
     self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
     self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
 
@@ -90,7 +90,7 @@ class SamplingStudioApp(QMainWindow):
       self.ui.sinusoidals_signals_menu.currentIndex()))
     self.ui.clear_composer_button.clicked.connect(lambda: composer.clear_composer(self))
     self.ui.delete_sinusoidal_button.clicked.connect(lambda: composer.deleteSinusoidal(self))
-    self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self,plot_name="Primary"))
+    self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self))
 
 
 if __name__ == "__main__":

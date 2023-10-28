@@ -35,10 +35,13 @@ class Signal():
 
         # gets array of fft amplitudes
         fft_amplitudes = np.abs(fft.fft(self.amplitude))
+
         # gets array of frequencies
         fft_frequencies = fft.fftfreq(n_samples, sample_period)
+
         # create new "clean array" of frequencies
         fft_clean_frequencies_array = []
+        
         for index in range(len(fft_frequencies)):
             # checks if signigifcant freq is present
             if fft_amplitudes[index] > 0.0004:
