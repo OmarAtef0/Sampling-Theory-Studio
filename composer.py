@@ -60,6 +60,8 @@ def update_sinusoidal_menubar(self, input):
   plot_sinusoidal_wave(self)
 
 def sum_sinusoidal_waves(self):
+    self.ui.sample_sinusoidals_button.setEnabled(True)
+    self.ui.clear_composer_button.setEnabled(True)
     summed_graph = True
     self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)   
     # max_frequency = classes.summed_sinusoidals.max_frequency

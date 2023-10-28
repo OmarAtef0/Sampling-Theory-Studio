@@ -104,6 +104,8 @@ class SamplingStudioApp(QMainWindow):
     self.ui.clear_composer_button.clicked.connect(lambda: composer.clear_composer(self))
     self.ui.delete_sinusoidal_button.clicked.connect(lambda: composer.deleteSinusoidal(self))
     self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self))
+    self.ui.sample_sinusoidals_button.setDisabled(True)
+    self.ui.clear_composer_button.setDisabled(True)
 
 
 if __name__ == "__main__":
