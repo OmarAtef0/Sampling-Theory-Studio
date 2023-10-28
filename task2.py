@@ -110,11 +110,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
-        font.setWeight(75)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_4.addWidget(self.label_4)
         self.sampling_slider = QtWidgets.QSlider(self.frame_3)
+        self.sampling_slider.setMinimum(1)
         self.sampling_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sampling_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sampling_slider.setObjectName("sampling_slider")
@@ -138,11 +138,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
-        font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_4.addWidget(self.label_3)
         self.noise_slider = QtWidgets.QSlider(self.frame_3)
+        self.noise_slider.setMinimum(1)
         self.noise_slider.setOrientation(QtCore.Qt.Horizontal)
         self.noise_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.noise_slider.setObjectName("noise_slider")
@@ -172,7 +172,6 @@ class Ui_MainWindow(object):
         self.import_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.import_btn.setFont(font)
         self.import_btn.setStyleSheet("\n"
 "\n"
@@ -198,7 +197,6 @@ class Ui_MainWindow(object):
         self.clear_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.clear_btn.setFont(font)
         self.clear_btn.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -216,7 +214,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
-        font.setWeight(75)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_4.addWidget(self.label_8)
@@ -331,7 +328,6 @@ class Ui_MainWindow(object):
         self.add_sinusoidal_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.add_sinusoidal_button.setFont(font)
         self.add_sinusoidal_button.setStyleSheet("\n"
 "\n"
@@ -357,7 +353,6 @@ class Ui_MainWindow(object):
         self.delete_sinusoidal_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.delete_sinusoidal_button.setFont(font)
         self.delete_sinusoidal_button.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -385,7 +380,7 @@ class Ui_MainWindow(object):
         self.frame_29.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_29.setObjectName("frame_29")
         self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.frame_29)
-        self.verticalLayout_22.setContentsMargins(0, 5, 0, 0)
+        self.verticalLayout_22.setContentsMargins(0, 5, 0, 5)
         self.verticalLayout_22.setSpacing(0)
         self.verticalLayout_22.setObjectName("verticalLayout_22")
         self.frame_30 = QtWidgets.QFrame(self.frame_29)
@@ -400,7 +395,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_23.addWidget(self.label_7)
@@ -414,6 +408,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setSpacing(6)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.sinusoidal_frequency_slider = QtWidgets.QSlider(self.frame_31)
+        self.sinusoidal_frequency_slider.setMinimum(1)
         self.sinusoidal_frequency_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_frequency_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_frequency_slider.setObjectName("sinusoidal_frequency_slider")
@@ -435,7 +430,7 @@ class Ui_MainWindow(object):
         self.frame_24.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_24.setObjectName("frame_24")
         self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.frame_24)
-        self.verticalLayout_19.setContentsMargins(0, 5, 0, 0)
+        self.verticalLayout_19.setContentsMargins(0, 5, 0, 5)
         self.verticalLayout_19.setSpacing(0)
         self.verticalLayout_19.setObjectName("verticalLayout_19")
         self.frame_27 = QtWidgets.QFrame(self.frame_24)
@@ -450,7 +445,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_21.addWidget(self.label_6)
@@ -464,6 +458,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setSpacing(6)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.sinusoidal_amplitude_slider = QtWidgets.QSlider(self.frame_28)
+        self.sinusoidal_amplitude_slider.setMinimum(1)
         self.sinusoidal_amplitude_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_amplitude_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_amplitude_slider.setObjectName("sinusoidal_amplitude_slider")
@@ -485,7 +480,7 @@ class Ui_MainWindow(object):
         self.frame_23.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_23.setObjectName("frame_23")
         self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.frame_23)
-        self.verticalLayout_18.setContentsMargins(0, 5, 0, 0)
+        self.verticalLayout_18.setContentsMargins(0, 5, 0, 5)
         self.verticalLayout_18.setSpacing(0)
         self.verticalLayout_18.setObjectName("verticalLayout_18")
         self.frame_25 = QtWidgets.QFrame(self.frame_23)
@@ -500,7 +495,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
-        font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_20.addWidget(self.label_5)
@@ -514,6 +508,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setSpacing(6)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.sinusoidal_phase_slider = QtWidgets.QSlider(self.frame_26)
+        self.sinusoidal_phase_slider.setMinimum(1)
         self.sinusoidal_phase_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sinusoidal_phase_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sinusoidal_phase_slider.setObjectName("sinusoidal_phase_slider")
@@ -556,7 +551,6 @@ class Ui_MainWindow(object):
         self.sample_sinusoidals_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.sample_sinusoidals_button.setFont(font)
         self.sample_sinusoidals_button.setStyleSheet("\n"
 "\n"
@@ -582,7 +576,6 @@ class Ui_MainWindow(object):
         self.clear_composer_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
-        font.setWeight(75)
         self.clear_composer_button.setFont(font)
         self.clear_composer_button.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -604,7 +597,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.WindowTabs.setCurrentIndex(0)
+        self.WindowTabs.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

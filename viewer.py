@@ -37,7 +37,7 @@ def browse(self):
     move_to_viewer(self, "browse")
 
 def add_noise(self, noise_slider_value):
-    if self.original_amplitude == []:
+    if len(self.original_amplitude) == 0:
         self.original_amplitude = self.current_signal.amplitude
     
     if noise_slider_value == 0:
@@ -50,8 +50,8 @@ def add_noise(self, noise_slider_value):
 
     # refresh all viewer graphs
     refresh_graphs(self)
-    change_sampling_rate(self, self.ui.sampling_slider.value())
-    self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
+    # change_sampling_rate(self, self.ui.sampling_slider.value())
+    # self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
 
 def move_to_viewer(self, Input):
     if Input == "composer":
@@ -69,18 +69,17 @@ def move_to_viewer(self, Input):
     self.ui.sampling_slider.setSingleStep(int (self.current_signal.max_analog_freq))
     self.ui.sampling_slider.setPageStep(int(self.current_signal.max_analog_freq))
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
-    print("2*Fmax = ", int(2*self.current_signal.max_analog_freq))
     
     # initialize plots
     self.graph_empty = False
 
-    self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude)
+    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-    self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
+    self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=1)
-    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+    self.plots_dict["Secondary1"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
 
 def clear(self):
   if self.graph_empty == True:
@@ -89,10 +88,10 @@ def clear(self):
       # overwrite variables
       self.browsed_signal = SampledSignal()
       self.current_signal = Signal()
-      self.interpolated_signal = Signal()
 
       self.resampled_time = []
       self.resampled_amplitude = []
+      self.original_amplitude = []
       self.ui.sampling_slider.setValue(0)
       self.ui.noise_slider.setValue(0)
       self.ui.fmaxLCD.display(0)
@@ -109,7 +108,7 @@ def refresh_graphs(self):
     self.plots_dict["Secondary1"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.interpolated_amplitude, pen=self.pen)
+    self.plots_dict["Secondary2"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
 
     self.pen = pg.mkPen(color=(150, 150, 150), width=2)
     self.plots_dict["Primary"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
@@ -121,7 +120,7 @@ def refresh_graphs(self):
 
     # Set the same y-axis range for the "Error" plot
     self.plots_dict["Error"].getViewBox().setYRange(primary_y_min, primary_y_max)
-    self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.interpolated_amplitude), pen=self.pen)
+    self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.reconstructed_amplitude), pen=self.pen)
 
 #################################################################################################
 
@@ -138,7 +137,7 @@ def change_sampling_rate(self, freqvalue):
     self.resampled_amplitude = np.array(returned_tuple[1])
     
     # sinc interpolation
-    self.interpolated_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
+    self.reconstructed_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
 
 
     # refresh all viewer graphs

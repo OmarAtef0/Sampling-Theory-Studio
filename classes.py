@@ -9,7 +9,9 @@ class SampledSignal():
     '''An object containing sample points array'''
     def __init__(self, sampling_freq=1, amplitude_arr=[]):
         self.sampling_freq = sampling_freq
-        self.max_analog_freq = (1/2)*self.sampling_freq
+
+        #Fs = 2*Fmax
+        self.max_analog_freq = (1/2) * self.sampling_freq
         self.amplitude_arr = amplitude_arr
         self.total_samples = len(amplitude_arr)
         self.time_array = []

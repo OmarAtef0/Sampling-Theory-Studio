@@ -29,10 +29,9 @@ class SamplingStudioApp(QMainWindow):
     self.graph_empty = True
     self.browsed_signal = SampledSignal()
     self.current_signal = Signal()
-    self.interpolated_signal = Signal()
     self.resampled_time = []
     self.resampled_amplitude = []
-    self.interpolated_amplitude = []
+    self.reconstructed_amplitude = []
     self.original_amplitude = []
 
     self.sinusoidal_index = 0
@@ -42,9 +41,9 @@ class SamplingStudioApp(QMainWindow):
 
     # initialize graph objects array/dict
     self.plots_dict = {
-                        "Primary": self.ui.primary_plot.plot(),
-                        "Secondary1": self.ui.primary_plot.plot(),
-                        "Secondary2": self.ui.reconstructed_plot.plot(),
+                        "Primary1": self.ui.primary_plot.plot(),
+                        "Primary2": self.ui.primary_plot.plot(),
+                        "Secondary1": self.ui.reconstructed_plot.plot(),
                         "Error": self.ui.error_plot.plot(),
                         "Sinusoidal": self.ui.sinusoidal_secondary_plot.plot(),
                         "Summed": self.ui.sinusoidal_main_plot.plot()
@@ -52,27 +51,29 @@ class SamplingStudioApp(QMainWindow):
     
     ''' 
     Primary1 is the original signal
-    Secondary1 is the resampled points 
-    Secondary2 is the reconstructed signal
+    Primary2 is the resampled points 
+    Secondary1 is the reconstructed signal
     '''
 
     #mouse
     self.ui.primary_plot.setMouseEnabled(x=False, y=False)
     self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
     self.ui.error_plot.setMouseEnabled(x=False, y=False)
+    self.ui.sinusoidal_main_plot.setMouseEnabled(x=False, y=False)
+    self.ui.sinusoidal_secondary_plot.setMouseEnabled(x=False, y=False)
 
     self.ui.clear_btn.clicked.connect(lambda: viewer.clear(self))
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
     # Sampling frequency control
-    self.ui.sampling_slider.setMinimum(1)
+    self.ui.sampling_slider.setMinimum(0)
     self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
     self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
 
     # SNR control
     self.ui.noise_slider.setMinimum(0)
     self.ui.noise_slider.valueChanged.connect(lambda: viewer.add_noise(self, self.ui.noise_slider.value() * 0.001))
-    self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value() * 0.001))
+    self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value()))
 
     # Sinsusoidal_Sliders
     self.ui.sinusoidal_frequency_slider.valueChanged.connect(lambda: composer.plot_sinusoidal_wave(self))
