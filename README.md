@@ -6,7 +6,7 @@ This desktop application is designed to illustrate the importance of the Nyquist
 ## Features
 
 ### 1. Sample & Recover
-- **Sample Signal**: Load a mid-length signal (approximately 1000 points) and visualize it. Users can sample it at various frequencies, which can be displayed in actual frequency or normalized frequency (concerning the maximum frequency).
+- **Sample Signal**: Load a mid-length signal (approximately 1000 points) and visualize it. Users can sample it at various frequencies, which can be displayed in real frequency or normalized frequency
 - **Recover Signal**: The application uses the Whittaker-Shannon interpolation formula to recover the original signal based on the sampled points.
 - **Visualization**: Three graphs display the original signal with markers for sampled points, the reconstructed signal, and the difference between the original and reconstructed signals.
 
