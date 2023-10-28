@@ -5,11 +5,10 @@ import os
 import sys
 import numpy as np
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QSlider , QColorDialog, QAction, QTextEdit
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QSlider , QColorDialog, QAction, QTextEdit, QPushButton, QProgressBar, QDialog, QVBoxLayout
 from PyQt5.QtCore import QTimer,Qt, QPointF
 from PyQt5.QtGui import QColor, QIcon, QCursor, QKeySequence
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QProgressBar, QDialog, QVBoxLayout
 import pyqtgraph as pg
 from pyqtgraph import PlotWidget
 import viewer
@@ -18,22 +17,22 @@ from task2 import Ui_MainWindow
 import composer
 MAX_SAMPLES = 3000
 NUM_OF_POINTS = 3000
-  
+
 class SamplingStudioApp(QMainWindow):
   def __init__(self):
     super().__init__()
     # Set up the UI
     self.ui = Ui_MainWindow()
     self.ui.setupUi(self)  
-    
+
+    # for deleted signal/empty Graph
     self.graph_empty = True
-    self.resampled_time = []
-    self.resampled_amplitude = []
-    self.interpolated_amplitude = []
     self.browsed_signal = SampledSignal()
     self.current_signal = Signal()
     self.interpolated_signal = Signal()
-
+    self.resampled_time = []
+    self.resampled_amplitude = []
+    self.interpolated_amplitude = []
     self.original_amplitude = []
 
     self.sinusoidal_index = 0
@@ -47,8 +46,8 @@ class SamplingStudioApp(QMainWindow):
                         "Secondary1": self.ui.primary_plot.plot(),
                         "Secondary2": self.ui.reconstructed_plot.plot(),
                         "Error": self.ui.error_plot.plot(),
-                        "Sinusoidal": self.ui.sinusoidal_secondary_plot_widget.plot(),
-                        "Summed": self.ui.sinusoidal_main_plot_widget.plot()
+                        "Sinusoidal": self.ui.sinusoidal_secondary_plot.plot(),
+                        "Summed": self.ui.sinusoidal_main_plot.plot()
                         }
     
     ''' 
@@ -66,7 +65,7 @@ class SamplingStudioApp(QMainWindow):
     self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
     # Sampling frequency control
-    self.ui.sampling_slider.setMinimum(0)
+    self.ui.sampling_slider.setMinimum(self.current_signal.max_analog_freq)
     self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
     self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
 
@@ -87,11 +86,10 @@ class SamplingStudioApp(QMainWindow):
 
     self.ui.add_sinusoidal_button.clicked.connect(lambda: composer.add_sinusoidal_wave(self))
     self.ui.sinusoidals_signals_menu.currentIndexChanged.connect(lambda: composer.update_sinusoidal_menubar(self, 
-    self.ui.sinusoidals_signals_menu.currentIndex()))
-
-    self.ui.clear_pushButton.clicked.connect(lambda: composer.clear_composer(self))
+      self.ui.sinusoidals_signals_menu.currentIndex()))
+    self.ui.clear_composer_button.clicked.connect(lambda: composer.clear_composer(self))
     self.ui.delete_sinusoidal_button.clicked.connect(lambda: composer.deleteSinusoidal(self))
-    self.ui.sampling_PushButton.clicked.connect(lambda: viewer.move_to_viewer(self, "composer"))
+    self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self,plot_name="Primary"))
 
 
 if __name__ == "__main__":

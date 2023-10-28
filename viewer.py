@@ -55,8 +55,9 @@ def add_noise(self, noise_slider_value):
 
 def move_to_viewer(self, Input):
     if Input == "composer":
-        self.current_signal = Signal(self.summed_signal.xAxis,self.summed_signal.yAxis, self.summed_signal.max_analog_freq)
+        self.current_signal = Signal(self.summed_sinusoidals.xAxis, self.summed_sinusoidals.yAxis, self.summed_sinusoidals.get_max_analog_frequency())
         self.ui.WindowTabs.setCurrentIndex(0)
+        self.ui.import_btn.setDisabled(True)
 
     elif Input == "browse":
         self.current_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)

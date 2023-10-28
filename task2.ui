@@ -30,7 +30,7 @@
     <item>
      <widget class="QTabWidget" name="WindowTabs">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -228,6 +228,7 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -280,6 +281,7 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -349,6 +351,7 @@ margin: 3px;
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -393,6 +396,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -418,6 +422,7 @@ QPushButton:hover {
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -504,10 +509,22 @@ QPushButton:hover {
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_16">
               <property name="spacing">
-               <number>10</number>
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>2</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>2</number>
               </property>
               <item>
-               <widget class="PlotWidget" name="sinusoidal_main_plot_widget_2" native="true">
+               <widget class="PlotWidget" name="sinusoidal_main_plot" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
@@ -537,7 +554,7 @@ margin: 3px;
                </widget>
               </item>
               <item>
-               <widget class="PlotWidget" name="sinusoidal_main_plot_widget" native="true">
+               <widget class="PlotWidget" name="sinusoidal_secondary_plot" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
@@ -648,8 +665,8 @@ margin: 3px;
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>200</width>
-                        <height>30</height>
+                        <width>225</width>
+                        <height>25</height>
                        </size>
                       </property>
                      </widget>
@@ -676,6 +693,7 @@ margin: 3px;
                       </property>
                       <property name="font">
                        <font>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -720,6 +738,7 @@ QPushButton:hover {
                       </property>
                       <property name="font">
                        <font>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -764,6 +783,7 @@ QPushButton:hover {
                       </property>
                       <property name="font">
                        <font>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -864,6 +884,7 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>14</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -900,7 +921,7 @@ QPushButton:hover {
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QSlider" name="sinusoidal_frequency_slider_3">
+                           <widget class="QSlider" name="sinusoidal_frequency_slider">
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
                             </property>
@@ -910,7 +931,7 @@ QPushButton:hover {
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLCDNumber" name="sinusoidal_frequency_LCD_3">
+                           <widget class="QLCDNumber" name="sinusoidal_frequency_LCD">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                               <horstretch>0</horstretch>
@@ -987,6 +1008,7 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>14</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1023,7 +1045,7 @@ QPushButton:hover {
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QSlider" name="amplitude_slider">
+                           <widget class="QSlider" name="sinusoidal_amplitude_slider">
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
                             </property>
@@ -1033,7 +1055,7 @@ QPushButton:hover {
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLCDNumber" name="amplitude_LCD">
+                           <widget class="QLCDNumber" name="sinusoidal_amplitude_LCD">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                               <horstretch>0</horstretch>
@@ -1110,6 +1132,7 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>14</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1146,7 +1169,7 @@ QPushButton:hover {
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QSlider" name="phase_slider">
+                           <widget class="QSlider" name="sinusoidal_phase_slider">
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
                             </property>
@@ -1156,7 +1179,7 @@ QPushButton:hover {
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLCDNumber" name="phase_LCD">
+                           <widget class="QLCDNumber" name="sinusoidal_phase_LCD">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                               <horstretch>0</horstretch>
@@ -1223,7 +1246,7 @@ QPushButton:hover {
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QPushButton" name="sample_button">
+                  <widget class="QPushButton" name="sample_sinusoidals_button">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
@@ -1244,6 +1267,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1267,7 +1291,7 @@ QPushButton:hover {
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="clear_button">
+                  <widget class="QPushButton" name="clear_composer_button">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                      <horstretch>0</horstretch>
@@ -1288,6 +1312,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
