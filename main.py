@@ -38,6 +38,19 @@ class SamplingStudioApp(QMainWindow):
     self.sinusoidal_number = 1
     self.sinusoidals_list = []
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
+    
+    plots = [
+    self.ui.primary_plot,
+    self.ui.reconstructed_plot,
+    self.ui.error_plot,
+    self.ui.sinusoidal_secondary_plot,
+    self.ui.sinusoidal_main_plot
+]
+
+    # Loop through the list and set labels for each plot
+    for plot_widget in plots:
+        plot_widget.setLabel('bottom', "Time")
+        plot_widget.setLabel('left', "Amplitude")
 
     # initialize graph objects array/dict
     self.plots_dict = {
@@ -101,4 +114,3 @@ if __name__ == "__main__":
     window.resize(1250,900)
     window.show()
     sys.exit(app.exec_())
-

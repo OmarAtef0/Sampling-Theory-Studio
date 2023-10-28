@@ -10,7 +10,7 @@ def plot_sinusoidal_wave(self):
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
     # Set axes and plot
-    xAxis = np.linspace(0, 2 * np.pi, NUM_OF_POINTS) #Time
+    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS)) #Time
     yAxis = amplitude * np.sin(frequency * xAxis + phase) #wave
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='w', title="Sinusoidal Waveform")
 
@@ -27,6 +27,8 @@ def add_sinusoidal_wave(self):
     self.sinusoidals_list.append(new_sinusoidal_wave)
     self.sinusoidal_number += 1
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
+
+
   else:
       xAxis = np.linspace(0, 2 * np.pi, NUM_OF_POINTS)
       yAxis = amplitude * np.sin(frequency * xAxis + phase)
@@ -84,6 +86,8 @@ def deleteSinusoidal(self):
     else:
         print("Invalid index or empty list, cannot delete.")
 
+
+
 def clear_composer(self):
     # Clear the "Summed" signal by setting empty arrays for data
     self.plots_dict["Summed"].setData([], [], pen='b', title="Sinusoidal Waveform")
@@ -100,18 +104,22 @@ def clear_composer(self):
     # Add a default "Signal 1" to the menu
     self.ui.sinusoidals_signals_menu.addItem("Signal 1")
 
-def move_sinusoidal_to_sampling(self):
+def move_sinusoidal_to_sampling(self, plot_name):
+    
     if not self.graph_empty: 
-        QtWidgets.QMessageBox.information(self, 'Error', 'Sampling is busy now!')
+      QtWidgets.QMessageBox.information(self, 'Error', 'Sampling is busy now!')
+    
     else:
-        self.graph_empty = False
-        # Get the data from the "Summed" plot
-        x_data, y_data = self.plots_dict["Summed"].getData()
-        
-        if len(x_data) > 0 and len(y_data) > 0:
-            # Move the data to the selected plot
-            self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)  
-            viewer.move_to_viewer(self, Input = "composer")
-        else:
-            print("No data to move from 'Summed' plot.")
-      
+      self.graph_empty = False
+      if plot_name in self.plots_dict:
+          # Get the data from the "Summed" plot
+          x_data, y_data = self.plots_dict["Summed"].getData()
+          
+          if len(x_data) > 0 and len(y_data) > 0:
+              # Move the data to the selected plot
+              self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)  
+              viewer.move_to_viewer(self, Input = "composer")
+          else:
+              print("No data to move from 'Summed' plot.")
+      else:
+          print(f"Invalid plot name: {plot_name}")
