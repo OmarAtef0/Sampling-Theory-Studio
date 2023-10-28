@@ -52,9 +52,10 @@ def update_sinusoidal_menubar(self, input):
     self.ui.sinusoidal_phase_slider.setValue(self.sinusoidals_list[self.sinusoidal_index].phase)
     self.ui.add_sinusoidal_button.setText("Apply")
   else:
-      self.ui.sinusoidal_amplitude_slider.setValue(1)
-      self.ui.sinusoidal_frequency_slider.setValue(1)
-      self.ui.sinusoidal_phase_slider.setValue(0)
+    self.ui.add_sinusoidal_button.setText("Add")
+    self.ui.sinusoidal_amplitude_slider.setValue(0)
+    self.ui.sinusoidal_frequency_slider.setValue(0)
+    self.ui.sinusoidal_phase_slider.setValue(0)
 
   plot_sinusoidal_wave(self)
 
@@ -103,8 +104,8 @@ def move_sinusoidal_to_sampling(self):
     if not self.graph_empty: 
       QtWidgets.QMessageBox.information(self, 'Error', 'Clear the viewer first!')
     
-    elif not summed_graph:
-      QtWidgets.QMessageBox.information(self, 'Error', 'Please add a sin wave first!')
+    # elif not summed_graph:
+    #   QtWidgets.QMessageBox.information(self, 'Error', 'Please add a sin wave first!')
     else:
       self.graph_empty = False
       # Get the data from the "Summed" plot
