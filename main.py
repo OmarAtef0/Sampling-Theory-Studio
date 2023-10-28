@@ -99,8 +99,7 @@ class SamplingStudioApp(QMainWindow):
     self.ui.sinusoidal_phase_slider.valueChanged.connect(lambda: self.ui.sinusoidal_phase_LCD.display(self.ui.sinusoidal_phase_slider.value()))
 
     self.ui.add_sinusoidal_button.clicked.connect(lambda: composer.add_sinusoidal_wave(self))
-    self.ui.sinusoidals_signals_menu.currentIndexChanged.connect(lambda: composer.update_sinusoidal_menubar(self, 
-      self.ui.sinusoidals_signals_menu.currentIndex()))
+    self.ui.sinusoidals_signals_menu.currentIndexChanged.connect(lambda: composer.update_sinusoidal_menubar(self, self.ui.sinusoidals_signals_menu.currentIndex()))
     self.ui.clear_composer_button.clicked.connect(lambda: composer.clear_composer(self))
     self.ui.delete_sinusoidal_button.clicked.connect(lambda: composer.deleteSinusoidal(self))
     self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self))

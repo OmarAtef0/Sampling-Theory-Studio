@@ -37,27 +37,34 @@ def browse(self):
     move_to_viewer(self, "browse")
 
 def add_noise(self, noise_slider_value):
-    if len(self.original_amplitude) == 0:
-        self.original_amplitude = self.current_signal.amplitude
-    
-    if noise_slider_value == 0:
-        self.current_signal.amplitude = self.original_amplitude
+    if self.graph_empty:
+        return
+        # QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
     else:
-        signal = np.array(self.current_signal.amplitude)
-        noise = np.random.normal(0, abs(signal), len(signal))
-        noisy_signal = signal + noise * noise_slider_value
-        self.current_signal.amplitude = noisy_signal
+        if len(self.original_amplitude) == 0:
+            self.original_amplitude = self.current_signal.amplitude
+        
+        if noise_slider_value == 0:
+            self.current_signal.amplitude = self.original_amplitude
+        else:
+            signal = np.array(self.current_signal.amplitude)
+            noise = np.random.normal(0, abs(signal), len(signal))
+            noisy_signal = signal + noise * noise_slider_value
+            self.current_signal.amplitude = noisy_signal
 
-    # refresh all viewer graphs
-    refresh_graphs(self)
-    change_sampling_rate(self, self.ui.sampling_slider.value())
-    self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
+        # refresh all viewer graphs
+        refresh_graphs(self)
+        change_sampling_rate(self, self.ui.sampling_slider.value())
+        self.ui.sampling_lcd.display(self.ui.sampling_slider.value())
 
 def move_to_viewer(self, Input):
+    self.graph_empty = False
+    self.ui.sampling_slider.setEnabled(True)
+    self.ui.noise_slider.setEnabled(True)
     if Input == "composer":
+        self.ui.import_btn.setDisabled(True)
         self.current_signal = Signal(self.summed_sinusoidals.xAxis, self.summed_sinusoidals.yAxis, self.summed_sinusoidals.get_max_analog_frequency())
         self.ui.WindowTabs.setCurrentIndex(0)
-        self.ui.import_btn.setDisabled(True)
 
     elif Input == "browse":
         self.current_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)
@@ -71,65 +78,56 @@ def move_to_viewer(self, Input):
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
     
     # initialize plots
-    self.graph_empty = False
-
-    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude)
-
-    self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-    self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
-
-    self.pen = pg.mkPen(color=(0, 200, 0), width=1)
-    self.plots_dict["Secondary1"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
+    refresh_graphs(self)
 
 def clear(self):
-  if self.graph_empty == True:
-      QtWidgets.QMessageBox.information(self, 'NO SIGNAL', 'No signal to delete')
-  else:
-      # overwrite variables
-      self.browsed_signal = SampledSignal()
-      self.current_signal = Signal()
+    if self.graph_empty == True:
+        QtWidgets.QMessageBox.information(self, 'NO SIGNAL', 'No signal to delete')
+    else:
+        # overwrite variables
+        self.graph_empty = True
+        self.browsed_signal = SampledSignal()
+        self.current_signal = Signal()
+        self.resampled_time = []
+        self.resampled_amplitude = []
+        self.reconstructed_amplitude = []
+        self.original_amplitude = []
 
-      self.resampled_time = []
-      self.resampled_amplitude = []
-      self.original_amplitude = []
-      self.ui.sampling_slider.setValue(1)
-      self.ui.noise_slider.setValue(0)
-      self.ui.fmaxLCD.display(0)
-      self.graph_empty = True
+        self.ui.sampling_slider.setValue(1)
+        self.ui.noise_slider.setValue(0)
+        self.ui.sampling_slider.setDisabled(True)
+        self.ui.noise_slider.setDisabled(True)
+        self.ui.fmaxLCD.display(0)
+        self.ui.import_btn.setEnabled(True)
 
-      # plots to be cleared
-      dict_keys = ["Primary1", "Primary2","Secondary1","Error"]
-      for index in dict_keys:
-          self.plots_dict[index].clear()
+        # plots to be cleared
+        refresh_graphs(self)
+
 
 def refresh_graphs(self):
     # refresh all viewer graphs
+    self.pen = pg.mkPen(color=(150, 150, 150), width=2)
+    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
+
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
     self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=2)
     self.plots_dict["Secondary1"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
 
-    self.pen = pg.mkPen(color=(150, 150, 150), width=2)
-    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
-
-    self.pen = pg.mkPen(color=(0, 200, 250), width=2)
-
-    # Get the y-axis range of the "Primary" plot
-    primary_y_min, primary_y_max = self.plots_dict["Primary1"].getViewBox().viewRange()[1]
-
-    # Set the same y-axis range for the "Error" plot
-    self.plots_dict["Error"].getViewBox().setYRange(primary_y_min, primary_y_max)
-    self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.reconstructed_amplitude), pen=self.pen)
+    if len(self.current_signal.amplitude) > 0 and len(self.reconstructed_amplitude) > 0:
+        self.pen = pg.mkPen(color=(0, 200, 250), width=2)
+        self.plots_dict["Error"].setData(self.current_signal.time, (self.current_signal.amplitude - self.reconstructed_amplitude), pen=self.pen)
+    else:
+        self.pen = pg.mkPen(color=(0, 200, 250), width=2)
+        self.plots_dict["Error"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
 #################################################################################################
 
 def change_sampling_rate(self, freqvalue):
-#   if freqvalue == 0:  
-#     freqvalue = 1
-
   if self.graph_empty:
-    QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
+    return
+    # QtWidgets.QMessageBox.warning(self, 'NO SINGAL ', 'No signal imported!')
   else:
     returned_tuple = ()
     returned_tuple = downsample(self.current_signal.time, self.current_signal.amplitude, freqvalue)
