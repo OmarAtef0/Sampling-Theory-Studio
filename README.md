@@ -1,4 +1,4 @@
-# Signal Sampling and Recovery Application
+# Sampling-Theory Studio
 
 ## Overview
 This desktop application is designed to illustrate the importance of the Nyquist-Shannon sampling theorem in digital signal processing. It allows users to load, sample, and recover analog signals, showing how different sampling frequencies affect signal recovery. our application offers the ability to mix, add noise, and perform real-time sampling and recovery. Additionally, it provides the flexibility to resize the application window. (make the application responsive)
