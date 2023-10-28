@@ -29,8 +29,13 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTabWidget" name="WindowTabs">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -228,6 +233,7 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -283,6 +289,7 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -355,6 +362,7 @@ margin: 3px;
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -399,6 +407,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -424,6 +433,7 @@ QPushButton:hover {
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -666,9 +676,15 @@ margin: 3px;
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>225</width>
-                        <height>25</height>
+                        <width>300</width>
+                        <height>35</height>
                        </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>MS Shell Dlg 2</family>
+                        <pointsize>10</pointsize>
+                       </font>
                       </property>
                      </widget>
                     </item>
@@ -694,6 +710,7 @@ margin: 3px;
                       </property>
                       <property name="font">
                        <font>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -738,6 +755,7 @@ QPushButton:hover {
                       </property>
                       <property name="font">
                        <font>
+                        <weight>75</weight>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -837,7 +855,8 @@ QPushButton:hover {
                            <widget class="QLabel" name="label_7">
                             <property name="font">
                              <font>
-                              <pointsize>14</pointsize>
+                              <pointsize>13</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -963,7 +982,8 @@ QPushButton:hover {
                            <widget class="QLabel" name="label_6">
                             <property name="font">
                              <font>
-                              <pointsize>14</pointsize>
+                              <pointsize>13</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1089,7 +1109,8 @@ QPushButton:hover {
                            <widget class="QLabel" name="label_5">
                             <property name="font">
                              <font>
-                              <pointsize>14</pointsize>
+                              <pointsize>13</pointsize>
+                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1227,6 +1248,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1271,6 +1293,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
+                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>

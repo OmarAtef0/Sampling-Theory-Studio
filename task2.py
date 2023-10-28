@@ -22,6 +22,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.WindowTabs = QtWidgets.QTabWidget(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.WindowTabs.setFont(font)
         self.WindowTabs.setObjectName("WindowTabs")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -110,6 +113,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
+        font.setWeight(75)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_4.addWidget(self.label_4)
@@ -138,6 +142,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
+        font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_4.addWidget(self.label_3)
@@ -172,6 +177,7 @@ class Ui_MainWindow(object):
         self.import_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.import_btn.setFont(font)
         self.import_btn.setStyleSheet("\n"
 "\n"
@@ -197,6 +203,7 @@ class Ui_MainWindow(object):
         self.clear_btn.setMaximumSize(QtCore.QSize(140, 40))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.clear_btn.setFont(font)
         self.clear_btn.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -214,6 +221,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
+        font.setWeight(75)
         self.label_8.setFont(font)
         self.label_8.setObjectName("label_8")
         self.horizontalLayout_4.addWidget(self.label_8)
@@ -315,7 +323,11 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.sinusoidals_signals_menu.sizePolicy().hasHeightForWidth())
         self.sinusoidals_signals_menu.setSizePolicy(sizePolicy)
-        self.sinusoidals_signals_menu.setMaximumSize(QtCore.QSize(225, 25))
+        self.sinusoidals_signals_menu.setMaximumSize(QtCore.QSize(300, 35))
+        font = QtGui.QFont()
+        font.setFamily("MS Shell Dlg 2")
+        font.setPointSize(10)
+        self.sinusoidals_signals_menu.setFont(font)
         self.sinusoidals_signals_menu.setObjectName("sinusoidals_signals_menu")
         self.horizontalLayout.addWidget(self.sinusoidals_signals_menu)
         self.add_sinusoidal_button = QtWidgets.QPushButton(self.frame_4)
@@ -328,6 +340,7 @@ class Ui_MainWindow(object):
         self.add_sinusoidal_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.add_sinusoidal_button.setFont(font)
         self.add_sinusoidal_button.setStyleSheet("\n"
 "\n"
@@ -353,6 +366,7 @@ class Ui_MainWindow(object):
         self.delete_sinusoidal_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.delete_sinusoidal_button.setFont(font)
         self.delete_sinusoidal_button.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -393,8 +407,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_23.setObjectName("verticalLayout_23")
         self.label_7 = QtWidgets.QLabel(self.frame_30)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(13)
         font.setBold(True)
+        font.setWeight(75)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
         self.verticalLayout_23.addWidget(self.label_7)
@@ -443,8 +458,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.setObjectName("verticalLayout_21")
         self.label_6 = QtWidgets.QLabel(self.frame_27)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(13)
         font.setBold(True)
+        font.setWeight(75)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout_21.addWidget(self.label_6)
@@ -493,8 +509,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_20.setObjectName("verticalLayout_20")
         self.label_5 = QtWidgets.QLabel(self.frame_25)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(13)
         font.setBold(True)
+        font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_20.addWidget(self.label_5)
@@ -551,6 +568,7 @@ class Ui_MainWindow(object):
         self.sample_sinusoidals_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.sample_sinusoidals_button.setFont(font)
         self.sample_sinusoidals_button.setStyleSheet("\n"
 "\n"
@@ -576,6 +594,7 @@ class Ui_MainWindow(object):
         self.clear_composer_button.setMaximumSize(QtCore.QSize(200, 35))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.clear_composer_button.setFont(font)
         self.clear_composer_button.setStyleSheet("QPushButton {\n"
 "    background-color: rgb(240, 0, 0);\n"
@@ -618,13 +637,3 @@ class Ui_MainWindow(object):
         self.clear_composer_button.setText(_translate("MainWindow", "Clear"))
         self.WindowTabs.setTabText(self.WindowTabs.indexOf(self.tab_2), _translate("MainWindow", "Composer"))
 from pyqtgraph import PlotWidget
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

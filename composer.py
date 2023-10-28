@@ -3,6 +3,7 @@ import classes
 import numpy as np
 import viewer
 NUM_OF_POINTS = 1000
+summed_graph = False
 
 def plot_sinusoidal_wave(self):
     #TODO make the plotting more efficient
@@ -45,19 +46,11 @@ def add_sinusoidal_wave(self):
 def update_sinusoidal_menubar(self, input):
   self.sinusoidal_index = input
   # Set slider values to appropriate positions when user selects already added signal
-  if len(self.sinusoidals_list) != 0:
-      if self.sinusoidal_index < len(self.sinusoidals_list):
-          self.ui.sinusoidal_frequency_slider.setValue(
-              self.sinusoidals_list[self.sinusoidal_index].frequency)
-          self.ui.sinusoidal_amplitude_slider.setValue(
-              self.sinusoidals_list[self.sinusoidal_index].amplitude)
-          self.ui.sinusoidal_phase_slider.setValue(
-              self.sinusoidals_list[self.sinusoidal_index].phase)
-      # Set slider values to default when yet to be confirmed signal is selected
-      else:
-        self.ui.sinusoidal_amplitude_slider.setValue(1)
-        self.ui.sinusoidal_frequency_slider.setValue(1)
-        self.ui.sinusoidal_phase_slider.setValue(0)
+  if len(self.sinusoidals_list) != 0 and self.sinusoidal_index < len(self.sinusoidals_list):
+    self.ui.sinusoidal_frequency_slider.setValue(self.sinusoidals_list[self.sinusoidal_index].frequency)
+    self.ui.sinusoidal_amplitude_slider.setValue(self.sinusoidals_list[self.sinusoidal_index].amplitude)
+    self.ui.sinusoidal_phase_slider.setValue(self.sinusoidals_list[self.sinusoidal_index].phase)
+    self.ui.add_sinusoidal_button.setText("Apply")
   else:
       self.ui.sinusoidal_amplitude_slider.setValue(1)
       self.ui.sinusoidal_frequency_slider.setValue(1)
@@ -66,6 +59,7 @@ def update_sinusoidal_menubar(self, input):
   plot_sinusoidal_wave(self)
 
 def sum_sinusoidal_waves(self):
+    summed_graph = True
     self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)   
     # max_frequency = classes.summed_sinusoidals.max_frequency
     self.plots_dict["Summed"].setData(self.summed_sinusoidals.xAxis, self.summed_sinusoidals.yAxis, pen='b', title="Sinusoidal Waveform")
@@ -104,22 +98,22 @@ def clear_composer(self):
     # Add a default "Signal 1" to the menu
     self.ui.sinusoidals_signals_menu.addItem("Signal 1")
 
-def move_sinusoidal_to_sampling(self, plot_name):
+def move_sinusoidal_to_sampling(self):
     
     if not self.graph_empty: 
-      QtWidgets.QMessageBox.information(self, 'Error', 'Sampling is busy now!')
+      QtWidgets.QMessageBox.information(self, 'Error', 'Clear the viewer first!')
     
+    elif not summed_graph:
+      QtWidgets.QMessageBox.information(self, 'Error', 'Please add a sin wave first!')
     else:
       self.graph_empty = False
-      if plot_name in self.plots_dict:
-          # Get the data from the "Summed" plot
-          x_data, y_data = self.plots_dict["Summed"].getData()
-          
-          if len(x_data) > 0 and len(y_data) > 0:
-              # Move the data to the selected plot
-              self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)  
-              viewer.move_to_viewer(self, Input = "composer")
-          else:
-              print("No data to move from 'Summed' plot.")
+      # Get the data from the "Summed" plot
+      x_data, y_data = self.plots_dict["Summed"].getData()
+      
+      if len(x_data) > 0 and len(y_data) > 0:
+          # Move the data to the selected plot
+          self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)  
+          viewer.move_to_viewer(self, Input = "composer")
       else:
-          print(f"Invalid plot name: {plot_name}")
+          print("No data to move from 'Summed' plot.")
+
