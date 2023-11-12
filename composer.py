@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-import classes
+from classes import *
 import numpy as np
 import viewer
 NUM_OF_POINTS = 1000
@@ -9,9 +9,10 @@ def plot_sinusoidal_wave(self):
     amplitude = self.ui.sinusoidal_amplitude_slider.value()
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
+
     # Set axes and plot
-    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS)) #Time
-    yAxis = amplitude * np.sin(frequency * xAxis + phase) #wave
+    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS)) 
+    yAxis = amplitude * np.sin(frequency * xAxis + phase) 
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='w', title="Sinusoidal Waveform")
 
 def add_sinusoidal_wave(self):
@@ -21,7 +22,7 @@ def add_sinusoidal_wave(self):
   phase = self.ui.sinusoidal_phase_slider.value()
 
   if self.sinusoidal_index == len(self.sinusoidals_list):
-    new_sinusoidal_wave = classes.sinusoidal_wave(index = self.sinusoidal_index, amplitude=amplitude, frequency=frequency, phase=phase)
+    new_sinusoidal_wave = sinusoidal_wave(index = self.sinusoidal_index, amplitude=amplitude, frequency=frequency, phase=phase)
     self.sinusoidals_list.append(new_sinusoidal_wave)
     self.sinusoidal_number += 1
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
@@ -47,8 +48,8 @@ def update_sinusoidal_menubar(self, input):
     self.ui.sinusoidal_phase_slider.setValue(self.sinusoidals_list[self.sinusoidal_index].phase)
   else:
     self.ui.add_sinusoidal_button.setText("Add")
-    self.ui.sinusoidal_amplitude_slider.setValue(0)
-    self.ui.sinusoidal_frequency_slider.setValue(0)
+    self.ui.sinusoidal_amplitude_slider.setValue(1)
+    self.ui.sinusoidal_frequency_slider.setValue(1)
     self.ui.sinusoidal_phase_slider.setValue(0)
 
   plot_sinusoidal_wave(self)
@@ -56,7 +57,7 @@ def update_sinusoidal_menubar(self, input):
 def sum_sinusoidal_waves(self):
     self.ui.sample_sinusoidals_button.setEnabled(True)
     self.ui.clear_composer_button.setEnabled(True)
-    self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)   
+    self.summed_sinusoidals = summed_sinusoidals(self.sinusoidals_list)   
 
     self.plots_dict["Summed"].setData(self.summed_sinusoidals.xAxis, self.summed_sinusoidals.yAxis, pen='b', title="Sinusoidal Waveform")
 
@@ -90,8 +91,6 @@ def clear_composer(self):
     # Add a default "Signal 1" to the menu
     self.ui.sinusoidals_signals_menu.addItem("Signal 1")
 
-    print("Cleared")
-
 def move_sinusoidal_to_sampling(self):
     if not self.graph_empty: 
       QtWidgets.QMessageBox.information(self, 'Error', 'Clear the viewer first!')
@@ -101,8 +100,7 @@ def move_sinusoidal_to_sampling(self):
       x_data, y_data = self.plots_dict["Summed"].getData()
       
       if len(x_data) > 0 and len(y_data) > 0:
-          # Move the data to the selected plot
-          self.summed_sinusoidals = classes.summed_sinusoidals(self.sinusoidals_list)  
+          # self.summed_sinusoidals = summed_sinusoidals(self.sinusoidals_list)  
           viewer.move_to_viewer(self, Input = "composer")
       else:
           print("No data to move from 'Summed' plot.")

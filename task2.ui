@@ -233,7 +233,6 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -256,6 +255,16 @@ margin: 3px;
                   </widget>
                  </item>
                  <item>
+                  <widget class="QLineEdit" name="sampling_lineEdit">
+                   <property name="maximumSize">
+                    <size>
+                     <width>75</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLCDNumber" name="sampling_lcd">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -265,12 +274,21 @@ margin: 3px;
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>50</width>
                      <height>35</height>
                     </size>
                    </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <bold>false</bold>
+                    </font>
+                   </property>
                    <property name="smallDecimalPoint">
                     <bool>false</bool>
+                   </property>
+                   <property name="digitCount">
+                    <number>3</number>
                    </property>
                   </widget>
                  </item>
@@ -289,7 +307,6 @@ margin: 3px;
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -321,12 +338,15 @@ margin: 3px;
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>75</width>
+                     <width>50</width>
                      <height>35</height>
                     </size>
                    </property>
                    <property name="smallDecimalPoint">
                     <bool>false</bool>
+                   </property>
+                   <property name="digitCount">
+                    <number>3</number>
                    </property>
                   </widget>
                  </item>
@@ -362,7 +382,7 @@ margin: 3px;
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
+                     <pointsize>11</pointsize>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -407,7 +427,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
+                     <pointsize>11</pointsize>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -433,7 +453,6 @@ QPushButton:hover {
                    <property name="font">
                     <font>
                      <pointsize>12</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -455,12 +474,15 @@ QPushButton:hover {
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>75</width>
+                  <width>50</width>
                   <height>35</height>
                  </size>
                 </property>
                 <property name="smallDecimalPoint">
                  <bool>false</bool>
+                </property>
+                <property name="digitCount">
+                 <number>3</number>
                 </property>
                </widget>
               </item>
@@ -710,7 +732,7 @@ margin: 3px;
                       </property>
                       <property name="font">
                        <font>
-                        <weight>75</weight>
+                        <pointsize>11</pointsize>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -755,7 +777,7 @@ QPushButton:hover {
                       </property>
                       <property name="font">
                        <font>
-                        <weight>75</weight>
+                        <pointsize>11</pointsize>
                         <bold>true</bold>
                        </font>
                       </property>
@@ -856,7 +878,6 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>13</pointsize>
-                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -896,6 +917,9 @@ QPushButton:hover {
                            <widget class="QSlider" name="sinusoidal_frequency_slider">
                             <property name="minimum">
                              <number>1</number>
+                            </property>
+                            <property name="maximum">
+                             <number>200</number>
                             </property>
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
@@ -983,7 +1007,6 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>13</pointsize>
-                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1023,6 +1046,9 @@ QPushButton:hover {
                            <widget class="QSlider" name="sinusoidal_amplitude_slider">
                             <property name="minimum">
                              <number>1</number>
+                            </property>
+                            <property name="maximum">
+                             <number>200</number>
                             </property>
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
@@ -1110,7 +1136,6 @@ QPushButton:hover {
                             <property name="font">
                              <font>
                               <pointsize>13</pointsize>
-                              <weight>75</weight>
                               <bold>true</bold>
                              </font>
                             </property>
@@ -1150,6 +1175,9 @@ QPushButton:hover {
                            <widget class="QSlider" name="sinusoidal_phase_slider">
                             <property name="minimum">
                              <number>1</number>
+                            </property>
+                            <property name="maximum">
+                             <number>360</number>
                             </property>
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
@@ -1248,7 +1276,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
+                     <pointsize>11</pointsize>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -1293,7 +1321,7 @@ QPushButton:hover {
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
+                     <pointsize>11</pointsize>
                      <bold>true</bold>
                     </font>
                    </property>
