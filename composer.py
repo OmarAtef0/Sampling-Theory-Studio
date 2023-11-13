@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from classes import *
 import numpy as np
 import viewer
-NUM_OF_POINTS = 1000
+NUM_OF_POINTS = 3001
 summed_graph = False
 
 def plot_sinusoidal_wave(self):

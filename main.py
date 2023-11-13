@@ -69,6 +69,11 @@ class SamplingStudioApp(QMainWindow):
         Secondary1 is the reconstructed signal
         '''
 
+        # Disable auto-range for both axes
+        self.ui.primary_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        self.ui.reconstructed_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        self.ui.error_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+
         #mouse
         self.ui.primary_plot.setMouseEnabled(x=False, y=False)
         self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)

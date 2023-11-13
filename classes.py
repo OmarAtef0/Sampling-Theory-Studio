@@ -3,7 +3,7 @@ import numpy as np
 
 # GLOBAL CONSTANTS
 MAX_SAMPLES = 3000
-NUM_OF_POINTS = 1000
+NUM_OF_POINTS = 3001
 
 class SampledSignal():
     '''An object containing sample points array'''
