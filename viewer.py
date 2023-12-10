@@ -175,13 +175,13 @@ def downsample(self, arr_x, arr_y, freq):
     max_sampling_freq = length / max(arr_x)
 
     # Calculate the step size for downsampling
-    step = 1
-    if self.sinusoidal_number == 1:
-        self.ui.sampling_slider.setMaximum(4) 
-        step = 5 - freq
-    else:
-        self.ui.sampling_slider.setMaximum(4*self.current_signal.max_analog_freq) 
-        step = round(max_sampling_freq / freq)
+    step = 5 - freq
+    # if self.sinusoidal_number == 1:
+    #     self.ui.sampling_slider.setMaximum(4) 
+        
+    # else:
+    #     self.ui.sampling_slider.setMaximum(4*self.current_signal.max_analog_freq) 
+    #     step = round(max_sampling_freq / freq)
 
     # Iterate through the original arrays with the calculated step size
     for index in range(0, length, step):
