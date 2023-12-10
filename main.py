@@ -1,16 +1,7 @@
-# please use snake case
-# avoid repeating code
-import csv
-import os
 import sys
-import numpy as np
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QSlider , QColorDialog, QAction, QTextEdit, QPushButton, QProgressBar, QDialog, QVBoxLayout
-from PyQt5.QtCore import QTimer,Qt, QPointF
-from PyQt5.QtGui import QColor, QIcon, QCursor, QKeySequence
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtGui import QIcon
 import pyqtgraph as pg
-from pyqtgraph import PlotWidget
 import viewer
 from classes import *
 from task2 import Ui_MainWindow
@@ -86,14 +77,12 @@ class SamplingStudioApp(QMainWindow):
 
         # Sampling frequency control
         self.ui.sampling_slider.setMinimum(1)
-        self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()+4))
+        self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
         self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
-        self.ui.sampling_slider.valueChanged.connect(lambda: self.update_lineEdit(self.ui.sampling_slider.value()))
-        self.ui.sampling_lineEdit.textChanged.connect(self.on_text_changed)
 
         # SNR control
         self.ui.noise_slider.setMinimum(0)
-        self.ui.noise_slider.valueChanged.connect(lambda: viewer.add_noise(self, self.ui.noise_slider.value() * 0.001))
+        self.ui.noise_slider.valueChanged.connect(lambda: viewer.add_noise(self, self.ui.noise_slider.value() * 0.003))
         self.ui.noise_slider.valueChanged.connect(lambda: self.ui.noise_lcd.display(self.ui.noise_slider.value()))
 
         # Sinsusoidal_Sliders
@@ -114,11 +103,6 @@ class SamplingStudioApp(QMainWindow):
         self.ui.sample_sinusoidals_button.setDisabled(True)
         self.ui.clear_composer_button.setDisabled(True)
 
-    def on_text_changed(self, value):
-        self.ui.sampling_slider.setValue(int(value))
-
-    def update_lineEdit(self, value):
-        self.ui.sampling_lineEdit.setText(str(value))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
