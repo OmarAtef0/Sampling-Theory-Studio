@@ -10,9 +10,11 @@ def plot_sinusoidal_wave(self):
     frequency = self.ui.sinusoidal_frequency_slider.value()
     phase = self.ui.sinusoidal_phase_slider.value()
 
-    # Set axes and plot
-    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS)) 
-    yAxis = amplitude * np.sin(frequency * xAxis + phase) 
+    # Equation for generating x-axis values
+    xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS))
+    # Equation for generating y-axis values based on sinusoidal function
+    yAxis = amplitude * np.sin(frequency * xAxis + phase)
+
     self.plots_dict["Sinusoidal"].setData(xAxis, yAxis, pen='w', title="Sinusoidal Waveform")
 
 def add_sinusoidal_wave(self):
@@ -27,13 +29,13 @@ def add_sinusoidal_wave(self):
     self.sinusoidal_number += 1
     self.ui.sinusoidals_signals_menu.addItem("Signal " + str(self.sinusoidal_number))
   else:
-      xAxis = np.linspace(0, 2 * np.pi, NUM_OF_POINTS)
-      yAxis = amplitude * np.sin(frequency * xAxis + phase)
-      self.sinusoidals_list[self.sinusoidal_index].amplitue = amplitude
-      self.sinusoidals_list[self.sinusoidal_index].frequency = frequency
-      self.sinusoidals_list[self.sinusoidal_index].phase = phase
-      self.sinusoidals_list[self.sinusoidal_index].xAxis = xAxis
-      self.sinusoidals_list[self.sinusoidal_index].yAxis = yAxis
+    xAxis = np.linspace(0, 2 * np.pi, NUM_OF_POINTS)
+    yAxis = amplitude * np.sin(frequency * xAxis + phase)
+    self.sinusoidals_list[self.sinusoidal_index].amplitue = amplitude
+    self.sinusoidals_list[self.sinusoidal_index].frequency = frequency
+    self.sinusoidals_list[self.sinusoidal_index].phase = phase
+    self.sinusoidals_list[self.sinusoidal_index].xAxis = xAxis
+    self.sinusoidals_list[self.sinusoidal_index].yAxis = yAxis
 
   sum_sinusoidal_waves(self)
   self.ui.sinusoidals_signals_menu.setCurrentIndex(len(self.sinusoidals_list))

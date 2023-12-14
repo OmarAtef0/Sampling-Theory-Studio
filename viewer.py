@@ -44,10 +44,9 @@ def add_noise(self, noise_slider_value):
 
             # Generate random noise with the same length as the signal, sampled from a normal distribution
             noise = np.random.normal(0, abs(signal_amplitude), len(signal_amplitude))
-            print("noise : ",noise)
 
             # Adjust the noise level using a slider value (noise_slider_value)
-            noisy_amplitude = signal_amplitude + noise * noise_slider_value / 15
+            noisy_amplitude = signal_amplitude + noise * noise_slider_value / 8
 
             # Update the amplitude values of the current_signal with the noisy signal
             self.current_signal.amplitude = noisy_amplitude
@@ -70,7 +69,8 @@ def move_to_viewer(self, Input):
         self.current_signal = Signal(self.browsed_signal.time_array,self.browsed_signal.amplitude_arr, self.browsed_signal.max_analog_freq)
         self.current_signal.get_max_freq()  
         self.ui.WindowTabs.setCurrentIndex(0)
-        
+    
+    self.ui.sampling_slider.setMaximum(4 * int(self.current_signal.max_analog_freq))
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
     
     self.original_amplitude = self.current_signal.amplitude
@@ -126,7 +126,6 @@ def refresh_graphs(self):
         self.pen = pg.mkPen(color=(0, 200, 250), width=2)
         self.plots_dict["Error"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
-
 def change_sampling_rate(self, freqvalue):
   if self.graph_empty:
     return
@@ -175,23 +174,13 @@ def downsample(self, arr_x, arr_y, freq):
     max_sampling_freq = length / max(arr_x)
 
     # Calculate the step size for downsampling
-    step = 5 - freq
-    # if self.sinusoidal_number == 1:
-    #     self.ui.sampling_slider.setMaximum(4) 
-        
-    # else:
-    #     self.ui.sampling_slider.setMaximum(4*self.current_signal.max_analog_freq) 
-    #     step = round(max_sampling_freq / freq)
+    step = round(max_sampling_freq / freq)
 
     # Iterate through the original arrays with the calculated step size
     for index in range(0, length, step):
         # Append the downsampled x and y values to the result lists
         resampled_x.append(arr_x[index])
         resampled_y.append(arr_y[index])
-    
-    # Print the original and downsampled x values for debugging or analysis
-    print("Original x values size:", len(arr_x))
-    print("Downsampled x values size:", len(resampled_x))
 
     # Return a tuple containing the downsampled x and y values
     return resampled_x, resampled_y

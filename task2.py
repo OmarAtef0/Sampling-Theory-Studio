@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addWidget(self.label_4)
         self.sampling_slider = QtWidgets.QSlider(self.frame_3)
         self.sampling_slider.setMinimum(1)
-        self.sampling_slider.setMaximum(4)
+        self.sampling_slider.setMaximum(100)
         self.sampling_slider.setOrientation(QtCore.Qt.Horizontal)
         self.sampling_slider.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.sampling_slider.setObjectName("sampling_slider")
@@ -139,13 +139,6 @@ class Ui_MainWindow(object):
         self.sampling_lcd.setProperty("value", 1.0)
         self.sampling_lcd.setObjectName("sampling_lcd")
         self.horizontalLayout_4.addWidget(self.sampling_lcd)
-        self.label_9 = QtWidgets.QLabel(self.frame_3)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        self.label_9.setFont(font)
-        self.label_9.setObjectName("label_9")
-        self.horizontalLayout_4.addWidget(self.label_9)
         self.label_3 = QtWidgets.QLabel(self.frame_3)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -625,14 +618,13 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.WindowTabs.setCurrentIndex(0)
+        self.WindowTabs.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_4.setText(_translate("MainWindow", "Sampling Frequency"))
-        self.label_9.setText(_translate("MainWindow", "Fmax"))
         self.label_3.setText(_translate("MainWindow", "SNR"))
         self.import_btn.setText(_translate("MainWindow", "Import"))
         self.clear_btn.setText(_translate("MainWindow", "Clear"))

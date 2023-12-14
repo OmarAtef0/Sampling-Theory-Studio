@@ -6,8 +6,8 @@ import viewer
 from classes import *
 from task2 import Ui_MainWindow
 import composer
-MAX_SAMPLES = 3000
-NUM_OF_POINTS = 3000
+MAX_SAMPLES = 3001
+NUM_OF_POINTS = 3001
 
 class SamplingStudioApp(QMainWindow):
     def __init__(self):

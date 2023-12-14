@@ -35,7 +35,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -247,7 +247,7 @@ margin: 3px;
                     <number>1</number>
                    </property>
                    <property name="maximum">
-                    <number>4</number>
+                    <number>100</number>
                    </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
@@ -285,19 +285,6 @@ margin: 3px;
                    </property>
                    <property name="value" stdset="0">
                     <double>1.000000000000000</double>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_9">
-                   <property name="font">
-                    <font>
-                     <pointsize>12</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Fmax</string>
                    </property>
                   </widget>
                  </item>
