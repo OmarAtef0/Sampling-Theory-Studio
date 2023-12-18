@@ -25,6 +25,8 @@ class SamplingStudioApp(QMainWindow):
         self.reconstructed_amplitude = []
         self.original_amplitude = []
         self.error = []
+        self.first_plot = True
+        self.current_f_sampling = 1
 
         self.sinusoidal_index = 0
         self.sinusoidal_number = 1
@@ -52,7 +54,7 @@ class SamplingStudioApp(QMainWindow):
                             "Error": self.ui.error_plot.plot(),
                             "Sinusoidal": self.ui.sinusoidal_secondary_plot.plot(),
                             "Summed": self.ui.sinusoidal_main_plot.plot()
-                            }
+                        }
         
         ''' 
         Primary1 is the original signal
@@ -72,6 +74,12 @@ class SamplingStudioApp(QMainWindow):
         self.ui.sinusoidal_main_plot.setMouseEnabled(x=False, y=False)
         self.ui.sinusoidal_secondary_plot.setMouseEnabled(x=False, y=False)
 
+        # self.ui.primary_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        # self.ui.reconstructed_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        # self.ui.error_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        # self.ui.sinusoidal_main_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        # self.ui.sinusoidal_secondary_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+
         self.ui.clear_btn.clicked.connect(lambda: viewer.clear(self))
         self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
 
@@ -79,6 +87,11 @@ class SamplingStudioApp(QMainWindow):
         self.ui.sampling_slider.setMinimum(1)
         self.ui.sampling_slider.valueChanged.connect(lambda: viewer.change_sampling_rate(self, self.ui.sampling_slider.value()))
         self.ui.sampling_slider.valueChanged.connect(lambda: self.ui.sampling_lcd.display(self.ui.sampling_slider.value()))
+
+        self.ui.sampling_slider_1.setMinimum(1)
+        self.ui.sampling_slider_1.valueChanged.connect(lambda: viewer.change_sampling_rate(self, (self.ui.sampling_slider_1.value()) * int(self.current_signal.max_analog_freq)))
+        self.ui.sampling_slider_1.valueChanged.connect(lambda: self.ui.sampling_lcd.display((self.ui.sampling_slider_1.value()) * int(self.current_signal.max_analog_freq)))
+        self.ui.sampling_slider_1.valueChanged.connect(self.connect_slider_values)
 
         # SNR control
         self.ui.noise_slider.setMinimum(0)
@@ -102,7 +115,9 @@ class SamplingStudioApp(QMainWindow):
         self.ui.sample_sinusoidals_button.clicked.connect(lambda: composer.move_sinusoidal_to_sampling(self))
         self.ui.sample_sinusoidals_button.setDisabled(True)
         self.ui.clear_composer_button.setDisabled(True)
-
+    
+    def connect_slider_values(self):
+        self.ui.sampling_slider.setValue(int(self.ui.sampling_slider_1.value() * self.current_signal.max_analog_freq))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
