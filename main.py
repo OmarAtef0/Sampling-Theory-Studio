@@ -27,6 +27,7 @@ class SamplingStudioApp(QMainWindow):
         self.error = []
         self.first_plot = True
         self.current_f_sampling = 1
+        self.fraction_val = 1.0
 
         self.sinusoidal_index = 0
         self.sinusoidal_number = 1
@@ -68,20 +69,15 @@ class SamplingStudioApp(QMainWindow):
         self.ui.error_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
 
         #mouse
-        self.ui.primary_plot.setMouseEnabled(x=False, y=False)
-        self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
-        self.ui.error_plot.setMouseEnabled(x=False, y=False)
-        self.ui.sinusoidal_main_plot.setMouseEnabled(x=False, y=False)
-        self.ui.sinusoidal_secondary_plot.setMouseEnabled(x=False, y=False)
-
-        # self.ui.primary_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
-        # self.ui.reconstructed_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
-        # self.ui.error_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
-        # self.ui.sinusoidal_main_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
-        # self.ui.sinusoidal_secondary_plot.plotItem.enableAutoRange(pg.ViewBox.YAxis, enable=False)
+        # self.ui.primary_plot.setMouseEnabled(x=False, y=False)
+        # self.ui.reconstructed_plot.setMouseEnabled(x=False, y=False)
+        # self.ui.error_plot.setMouseEnabled(x=False, y=False)
+        # self.ui.sinusoidal_main_plot.setMouseEnabled(x=False, y=False)
+        # self.ui.sinusoidal_secondary_plot.setMouseEnabled(x=False, y=False)
 
         self.ui.clear_btn.clicked.connect(lambda: viewer.clear(self))
         self.ui.import_btn.clicked.connect(lambda: viewer.browse(self))
+        self.fmax_boolean = False
 
         # Sampling frequency control
         self.ui.sampling_slider.setMinimum(1)

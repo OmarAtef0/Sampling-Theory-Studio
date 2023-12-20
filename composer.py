@@ -12,6 +12,7 @@ def plot_sinusoidal_wave(self):
 
     # Equation for generating x-axis values
     xAxis = np.linspace(0, 2 * np.pi, int(NUM_OF_POINTS))
+
     # Equation for generating y-axis values based on sinusoidal function
     yAxis = amplitude * np.sin(frequency * xAxis + phase)
 

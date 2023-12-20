@@ -2,8 +2,8 @@ from scipy import fft
 import numpy as np
 
 # GLOBAL CONSTANTS
-MAX_SAMPLES = 3000
-NUM_OF_POINTS = 3001
+MAX_SAMPLES = 3001
+NUM_OF_POINTS = 901
 
 class SampledSignal():
     '''An object containing sample points array'''
@@ -37,12 +37,32 @@ class Signal():
 
   # Function to calculate and return the maximum analog frequency present in the signal
   def get_max_freq(self):
-    spec = np.fft.rfft(self.amplitude)
-    peak = np.argmax(spec)
-    val = np.abs(peak) 
+    # Calculate the time period between consecutive samples
+    sample_period = self.time[1] - self.time[0]
 
-    self.max_analog_freq = (val/6)*100 / 2
-    print("2Fmax: ", (val/6)*100)
+    # Obtain the total number of samples
+    n_samples = len(self.time)
+
+    # Perform Fast Fourier Transform on the signal to obtain amplitude and frequency information
+
+    # self.amplitude represents the signal in the time domain.
+    # fft_amplitudes represents the signal in the frequency domain after applying FFT.
+    fft_amplitudes = np.abs(fft.fft(self.amplitude))
+    fft_frequencies = fft.fftfreq(n_samples, sample_period)
+
+    # Create a new array to store "clean" frequencies (those with significant amplitudes)
+    fft_clean_frequencies_array = []
+
+    # Iterate through each frequency index
+    for index in range(len(fft_frequencies)):
+        # Check if the amplitude at the current frequency index is above a threshold 
+        if fft_amplitudes[index] > 0.0004:
+          # If significant, append the corresponding frequency to the clean frequencies array
+          fft_clean_frequencies_array.append(fft_frequencies[index])
+
+    # Find the maximum frequency in the clean frequencies array
+    self.max_analog_freq = max(fft_clean_frequencies_array)
+    print("class fmax: ",max(fft_clean_frequencies_array))
 
 # Class definition for a sinusoidal wave
 class sinusoidal_wave():
