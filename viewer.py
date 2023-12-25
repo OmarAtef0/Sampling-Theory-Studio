@@ -196,16 +196,15 @@ def downsample(self, arr_x, arr_y, freq):
 
 
 
-
-
 def check_noisy(self, freqvalue, snr_level):
 
     if freqvalue >= 2.5 * self.current_signal.max_analog_freq :
         self.current_signal.amplitude = self.noisy_amplitude
+    elif freqvalue < 2 * self.current_signal.max_analog_freq:
+        self.current_signal.amplitude = self.noisy_amplitude
     else:
         self.current_signal.amplitude -= (self.noise/200) 
 
-        
         
         
  
