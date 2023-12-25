@@ -28,7 +28,9 @@ class SamplingStudioApp(QMainWindow):
         self.first_plot = True
         self.current_f_sampling = 1
         self.fraction_val = 1.0
-
+        self.noise = []
+        self.noisy_amplitude = []
+        self.snr_level = 0
         self.sinusoidal_index = 0
         self.sinusoidal_number = 1
         self.sinusoidals_list = []
@@ -40,7 +42,7 @@ class SamplingStudioApp(QMainWindow):
         self.ui.error_plot,
         self.ui.sinusoidal_secondary_plot,
         self.ui.sinusoidal_main_plot
-    ]
+        ]
 
         # Loop through the list and set labels for each plot
         for plot_widget in plots:
