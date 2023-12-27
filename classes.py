@@ -2,8 +2,8 @@ from scipy import fft
 import numpy as np
 
 # GLOBAL CONSTANTS
-MAX_SAMPLES = 3001
-NUM_OF_POINTS = 901
+MAX_SAMPLES = 1000
+NUM_OF_POINTS = 1000
 
 class SampledSignal():
     '''An object containing sample points array'''
@@ -114,3 +114,5 @@ class summed_sinusoidals():
 
     # Set the final y-axis values of the summed wave
     self.yAxis = self.yAxis_sum
+    print(len(self.xAxis))
+    print(len(self.yAxis))

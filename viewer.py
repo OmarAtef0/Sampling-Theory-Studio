@@ -15,12 +15,10 @@ def browse(self):
     amplitude = []
     self.fsample = 1
     
-    with open(path, 'r') as csvFile:    # 'r' its a mode for reading and writing
+    with open(path, 'r') as csvFile:   
         csvReader = csv.reader(csvFile, delimiter=',')
-        # neglect the first line in the csv file
-        next(csvReader)
         for line in csvReader:
-            if len(time) > MAX_SAMPLES:
+            if len(time) - 1 >= MAX_SAMPLES:
                 break
             else:
                 amplitude.append(float(line[1]))
@@ -35,22 +33,23 @@ def add_noise(self, noise_slider_value):
     if self.graph_empty:
         return
     else:
-        if noise_slider_value == 0:
-            self.current_signal.amplitude = self.original_amplitude
-        else:
+        # if noise_slider_value == 0:
+        #     self.current_signal.amplitude = self.original_amplitude
+        # else:
             # Extract the amplitude values from the current_signal and convert them to a NumPy array
-            signal_amplitude = np.array(self.original_amplitude)
+        signal_amplitude = np.array(self.original_amplitude)
 
-            # Generate random noise with the same length as the signal, sampled from a normal distribution
-            self.noise = np.random.normal(0, abs(signal_amplitude), len(signal_amplitude))
+        # Generate random noise with the same length as the signal, sampled from a normal distribution
+        self.noise = np.random.normal(0, abs(signal_amplitude), len(signal_amplitude))
 
-            # Adjust the noise level using a slider value (noise_slider_value)
-            self.noisy_amplitude = signal_amplitude + self.noise * noise_slider_value
+        print(self.current_signal.amplitude[0:5])
 
-            # Update the amplitude values of the current_signal with the noisy signal
-            self.current_signal.amplitude = self.noisy_amplitude.copy()
+        self.current_signal.amplitude = self.original_amplitude + self.noise * noise_slider_value * 0.8
+
+        print(self.current_signal.amplitude[0:5])
         
         self.snr_level = self.ui.noise_slider.value()
+
         # refresh all viewer graphs
         refresh_graphs(self)
 
@@ -68,7 +67,7 @@ def move_to_viewer(self, Input):
         self.current_signal.get_max_freq()  
         self.ui.WindowTabs.setCurrentIndex(0)
     
-    self.ui.sampling_slider.setMaximum(4 * int(self.current_signal.max_analog_freq))
+    self.ui.sampling_slider.setMaximum(100 * int(self.current_signal.max_analog_freq))
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
     
     self.original_amplitude = self.current_signal.amplitude
@@ -107,104 +106,62 @@ def refresh_graphs(self):
         self.ui.error_plot.setYRange(*y_range)
 
     self.pen = pg.mkPen(color=(0, 200, 250), width=2)
-    if self.ui.noise_slider.value() > 1: 
-        self.plots_dict["Primary1"].setData(self.current_signal.time, self.noisy_amplitude, pen=self.pen)
-    # refresh all viewer graphs
-    else:
-        self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
+    self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
-
-    # self.pen = pg.mkPen(color=(0, 200, 0), width=0)
-    # self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen,  symbolSize=3)
+    self.pen = pg.mkPen(color=(0, 200, 0), width=0)
+    self.plots_dict["Primary2"].setData(self.resampled_time, self.resampled_amplitude, symbol='o', pen=self.pen,  symbolSize=3)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=2)
-    self.plots_dict["Secondary1"].setData(self.current_signal.time, self.reconstructed_amplitude, pen=self.pen)
-
-    if len(self.current_signal.amplitude) > 0 and len(self.reconstructed_amplitude) > 0:
-        self.pen = pg.mkPen(color=(0, 200, 250), width=2) 
-        self.error = self.original_amplitude - self.reconstructed_amplitude
-            
-        self.plots_dict["Error"].setData(self.current_signal.time, self.error, pen=self.pen)
-            
+    self.plots_dict["Secondary1"].setData(self.current_signal.time[0:1000], self.reconstructed_amplitude, pen=self.pen)
+    
+    self.pen = pg.mkPen(color=(0, 200, 250), width=2) 
+    if len(self.error) > 0:
+        self.plots_dict["Error"].setData(self.current_signal.time[0:1000], self.error, pen=self.pen)
     else:
-        self.pen = pg.mkPen(color=(0, 200, 250), width=2)
-        self.plots_dict["Error"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
+        self.plots_dict["Error"].setData(self.current_signal.time[0:1000], self.current_signal.amplitude[0:1000], pen=self.pen)
+
+def resample(self):
+    # points
+    x_vec = self.current_signal.time
+    y_vec = self.current_signal.amplitude
+
+    # Sampling the signal
+    x_sampled = np.arange(x_vec[0], x_vec[-1], 1/self.f_sampling)
+    y_sampled = np.interp(x_sampled, x_vec, y_vec)
+
+    self.resampled_time = x_sampled 
+    self.resampled_amplitude = y_sampled
+
+def reconstruct(self):
+    # Reconstruct Signal
+    t = np.linspace(self.current_signal.time[0], self.current_signal.time[-1], 1000)
+    x_vec = self.resampled_time
+    y_vec = self.resampled_amplitude
+
+    # Whittaker–Shannon interpolation formula
+    y_interp = np.zeros_like(t)
+    for i, t_i in enumerate(t):
+        y_interp[i] = np.sum(y_vec * np.sinc((x_vec - t_i) * self.f_sampling))
+    
+    self.reconstructed_time = t
+    self.reconstructed_amplitude = y_interp
+
+
+def display_error_signal(self):
+    # calculate difference between original signal and reconstructed signal
+
+    y_vec_error = np.abs(self.original_amplitude[0:1000] - self.reconstructed_amplitude)
+    self.error = y_vec_error
 
 def change_sampling_rate(self, freqvalue):
+  self.f_sampling = freqvalue
   if self.graph_empty:
     return
   else:
-    # print("noise: ",self.ui.noise_slider.value() )
-    if self.ui.noise_slider.value() > 1:
-        check_noisy(self, freqvalue, self.snr_level)
-
-    returned_tuple = () 
-    returned_tuple = downsample(self, self.current_signal.time, self.current_signal.amplitude, freqvalue)
-        
-    self.resampled_time = np.array(returned_tuple[0])
-    self.resampled_amplitude = np.array(returned_tuple[1])
-    
-    # sinc interpolation
-    self.reconstructed_amplitude = sinc_interpolation(self.resampled_amplitude, self.resampled_time, self.current_signal.time)
-
-    # refresh all viewer graphs
+    resample(self)
+    reconstruct(self)
+    display_error_signal(self)
     refresh_graphs(self)
 
-def sinc_interpolation(input_amplitude, input_time, original_time):
-    '''Whittaker Shannon interpolation formula linked here:
-      https://en.wikipedia.org/wiki/Whittaker%E2%80%93Shannon_interpolation_formula '''
-
-    # Find the period
-    if len(input_time) != 0:
-        T = input_time[1] - input_time[0]
-
-    # The equation 
-    # original_time - downsampled_time -> divide this matrix by period -> np.sinc() -> dot product by input_amplitude
-
-    # The goal of this code is to create a matrix sincM with dimensions (M, N)
-    sincM = np.tile(original_time, (len(input_time), 1)) - np.tile(input_time[:, np.newaxis], (1, len(original_time)))
-
-    # np.newaxis -> transpose 
-    
-    # sinc(x) = sin(pi * x) / (pi * x)
-    output_amplitude = np.dot(input_amplitude, np.sinc(sincM / T))
-    return output_amplitude
-
-def downsample(self, arr_x, arr_y, freq):
-    '''Returns a tuple containing downsampled (arr_x, arr_y)'''
-
-    # Lists to store downsampled x and y values
-    resampled_x = []
-    resampled_y = []
-
-    # Calculate the maximum sampling frequency based on the input x values
-    # arr_x is a time array, and the maximum sampling frequency is determined by the maximum time value
-    length = len(arr_x)
-    max_sampling_freq = length / max(arr_x)
-
-    # Calculate the step size for downsampling
-    step = round(max_sampling_freq / freq)
-
-    # Iterate through the original arrays with the calculated step size
-    for index in range(0, length, step):
-        # Append the downsampled x and y values to the result lists
-        resampled_x.append(arr_x[index])
-        resampled_y.append(arr_y[index])
-
-    # Return a tuple containing the downsampled x and y values
-    return resampled_x, resampled_y
-
-
-
-def check_noisy(self, freqvalue, snr_level):
-
-    if freqvalue >= 2.5 * self.current_signal.max_analog_freq :
-        self.current_signal.amplitude = self.noisy_amplitude
-    elif freqvalue < 2 * self.current_signal.max_analog_freq:
-        self.current_signal.amplitude = self.noisy_amplitude
-    else:
-        self.current_signal.amplitude -= (self.noise/200) 
-
-        
         
  

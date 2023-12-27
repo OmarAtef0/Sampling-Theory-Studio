@@ -6,8 +6,10 @@ import viewer
 from classes import *
 from task2 import Ui_MainWindow
 import composer
-MAX_SAMPLES = 3001
-NUM_OF_POINTS = 3001
+import qdarkstyle
+
+MAX_SAMPLES = 1000
+NUM_OF_POINTS = 1000
 
 class SamplingStudioApp(QMainWindow):
     def __init__(self):
@@ -20,11 +22,16 @@ class SamplingStudioApp(QMainWindow):
         self.graph_empty = True
         self.browsed_signal = SampledSignal()
         self.current_signal = Signal()
+
         self.resampled_time = []
         self.resampled_amplitude = []
+
+        self.reconstructed_time = []
         self.reconstructed_amplitude = []
+
         self.original_amplitude = []
         self.error = []
+
         self.first_plot = True
         self.current_f_sampling = 1
         self.fraction_val = 1.0
@@ -119,8 +126,9 @@ class SamplingStudioApp(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
     window = SamplingStudioApp()
-    window.setWindowTitle("Sampling Studio")
+    window.setWindowTitle("Sampling Theory Studio")
     app.setWindowIcon(QIcon("logo.png"))
     window.resize(1250,900)
     window.show()
