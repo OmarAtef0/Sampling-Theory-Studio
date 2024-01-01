@@ -33,25 +33,19 @@ def add_noise(self, noise_slider_value):
     if self.graph_empty:
         return
     else:
-        # if noise_slider_value == 0:
-        #     self.current_signal.amplitude = self.original_amplitude
-        # else:
             # Extract the amplitude values from the current_signal and convert them to a NumPy array
         signal_amplitude = np.array(self.original_amplitude)
 
         # Generate random noise with the same length as the signal, sampled from a normal distribution
-        self.noise = np.random.normal(0, abs(signal_amplitude), len(signal_amplitude))
+        self.noise = np.random.normal(0, abs(signal_amplitude), len(signal_amplitude)) 
 
-        print(self.current_signal.amplitude[0:5])
+        self.noisy_amplitude = np.array(self.original_amplitude + self.noise * noise_slider_value * 0.8)
 
-        self.current_signal.amplitude = self.original_amplitude + self.noise * noise_slider_value * 0.8
-
-        print(self.current_signal.amplitude[0:5])
-        
-        self.snr_level = self.ui.noise_slider.value()
+        self.current_signal.amplitude = np.array(self.noisy_amplitude)
 
         # refresh all viewer graphs
         refresh_graphs(self)
+        change_sampling_rate(self, self.ui.sampling_slider.value())
 
 def move_to_viewer(self, Input):
     self.graph_empty = False
@@ -70,7 +64,7 @@ def move_to_viewer(self, Input):
     self.ui.sampling_slider.setMaximum(100 * int(self.current_signal.max_analog_freq))
     self.ui.fmaxLCD.display(int(self.current_signal.max_analog_freq))
     
-    self.original_amplitude = self.current_signal.amplitude
+    self.original_amplitude = np.array(self.current_signal.amplitude)
     # initialize plots
     refresh_graphs(self)
     change_sampling_rate(self, self.ui.sampling_slider.value())
@@ -87,6 +81,7 @@ def clear(self):
         self.resampled_amplitude = []
         self.reconstructed_amplitude = []
         self.original_amplitude = []
+        self.noisy_amplitude = []
 
         self.ui.sampling_slider.setValue(1)
         self.ui.noise_slider.setValue(0)
@@ -105,7 +100,8 @@ def refresh_graphs(self):
         self.ui.reconstructed_plot.setYRange(*y_range)
         self.ui.error_plot.setYRange(*y_range)
 
-    self.pen = pg.mkPen(color=(0, 200, 250), width=2)
+    # refresh all viewer graphs
+    self.pen = pg.mkPen(color=(0, 200, 250), width=2) 
     self.plots_dict["Primary1"].setData(self.current_signal.time, self.current_signal.amplitude, pen=self.pen)
 
     self.pen = pg.mkPen(color=(0, 200, 0), width=0)
@@ -149,15 +145,14 @@ def reconstruct(self):
 
 def display_error_signal(self):
     # calculate difference between original signal and reconstructed signal
-
-    y_vec_error = np.abs(self.original_amplitude[0:1000] - self.reconstructed_amplitude)
+    y_vec_error = np.abs(self.current_signal.amplitude[0:1000] - self.reconstructed_amplitude)
     self.error = y_vec_error
 
 def change_sampling_rate(self, freqvalue):
   self.f_sampling = freqvalue
   if self.graph_empty:
     return
-  else:
+  else:      
     resample(self)
     reconstruct(self)
     display_error_signal(self)
