@@ -45,7 +45,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
-<tr>
+<table>
+  <tr>
     <td align="center">
       <a href="https://github.com/OmarAtef0" target="_black">
       <img src="https://avatars.githubusercontent.com/u/131784941?v=4" width="150px;" alt="Omar Atef"/>
@@ -71,3 +72,4 @@ python main.py
       <sub><b>Ahmed Khaled</b></sub></a>
     </td>  
   </tr>
+ </table>
