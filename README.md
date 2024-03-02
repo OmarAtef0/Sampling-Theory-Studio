@@ -44,6 +44,9 @@ pip install -r requirements.txt
 ```sh
 python main.py
 ```
+## Contributors
+
+We would like to acknowledge the following individuals for their contributions:
 
 <table>
   <tr>
