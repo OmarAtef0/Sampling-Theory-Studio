@@ -126,7 +126,6 @@ class SamplingStudioApp(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
     window = SamplingStudioApp()
     window.setWindowTitle("Sampling Theory Studio")
     app.setWindowIcon(QIcon("logo.png"))
